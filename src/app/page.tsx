@@ -1,4 +1,4 @@
-import * as acions from "@/actions";
+import * as actions from "@/actions";
 import { auth } from "@/auth";
 import PrimaryButton from "@/components/PrimaryButton";
 import Profile from "@/components/Profile";
@@ -9,7 +9,7 @@ export default async function Home() {
   
   if (!session) {
     return (
-      <form action={acions.signIn}>
+      <form action={actions.signIn}>
         <PrimaryButton type="submit" children="Login with GitHub" />
       </form>
     );
@@ -21,7 +21,7 @@ export default async function Home() {
 
       <img src={session.user?.image ?? ""} alt="" width={100} />
 
-      <form action={acions.signOut}>
+      <form action={actions.signOut}>
         <SecondaryButton type="submit" children="Logout" color="warning" />
       </form>
       <Profile />
