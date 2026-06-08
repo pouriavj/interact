@@ -1,13 +1,16 @@
 import * as acions from "@/actions";
 import { auth } from "@/auth";
+import PrimaryButton from "@/components/PrimaryButton";
+import Profile from "@/components/Profile";
+import SecondaryButton from "@/components/SecondaryButton";
 
 export default async function Home() {
   const session = await auth();
-
+  
   if (!session) {
     return (
       <form action={acions.signIn}>
-        <button type="submit">Login with GitHub</button>
+        <PrimaryButton type="submit" children="Login with GitHub" />
       </form>
     );
   }
@@ -19,8 +22,9 @@ export default async function Home() {
       <img src={session.user?.image ?? ""} alt="" width={100} />
 
       <form action={acions.signOut}>
-        <button type="submit">Logout</button>
+        <SecondaryButton type="submit" children="Logout" color="warning" />
       </form>
+      <Profile />
     </div>
   );
 }
