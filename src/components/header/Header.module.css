@@ -1,0 +1,56 @@
+.header {
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-inline: 1.25rem;
+
+  background: var(--surface);
+
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 1.75rem;
+  font-weight: 700;
+
+  letter-spacing: -0.04em;
+
+  cursor: pointer;
+  user-select: none;
+
+  color: var(--text);
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.iconButton {
+  width: 42px !important;
+  height: 42px !important;
+
+  border: 1px solid var(--border) !important;
+  border-radius: 50% !important;
+
+  background: var(--surface) !important;
+
+  transition: all 0.2s ease !important;
+}
+
+.iconButton:hover {
+  background: var(--surface-hover) !important;
+}
+
+.iconButton svg {
+  font-size: 1.25rem;
+  color: var(--text);
+}

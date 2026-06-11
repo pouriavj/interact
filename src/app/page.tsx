@@ -1,12 +1,12 @@
 import * as actions from "@/actions";
 import { auth } from "@/auth";
 import PrimaryButton from "@/components/PrimaryButton";
-import Profile from "@/components/Profile";
+
 import SecondaryButton from "@/components/SecondaryButton";
 
 export default async function Home() {
   const session = await auth();
-  
+
   if (!session) {
     return (
       <form action={actions.signIn}>
@@ -24,7 +24,7 @@ export default async function Home() {
       <form action={actions.signOut}>
         <SecondaryButton type="submit" children="Logout" color="warning" />
       </form>
-      <Profile />
+      <div>hello</div>
     </div>
   );
 }

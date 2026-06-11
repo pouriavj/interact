@@ -1,16 +1,45 @@
-const paths = {
+export const paths = {
   home() {
     return "/";
   },
-  topicShow(topicSlug: string) {
-    return `/topics/${topicSlug}`;
+
+  explore() {
+    return "/explore";
   },
-  postCreate(topicSlug: string) {
-    return `/topics/${topicSlug}/posts/new`;
+
+  signIn() {
+    return "/signin";
   },
-  postShow(topicSlug: string, postId: string) {
-    return `/topics/${topicSlug}/posts/${postId}`;
+
+  signUp() {
+    return "/signup";
+  },
+
+  activity() {
+    return "/activity";
+  },
+
+  messages() {
+    return "/messages";
+  },
+
+  conversation(conversationId: string) {
+    return `/messages/${conversationId}`;
+  },
+
+  profile(username: string) {
+    return `/profile/${username}`;
+  },
+
+  story(storyId: string) {
+    return `/stories/${storyId}`;
+  },
+
+  settings() {
+    return "/settings";
+  },
+
+  editProfile() {
+    return "/settings/profile";
   },
 };
-
-export default paths;
