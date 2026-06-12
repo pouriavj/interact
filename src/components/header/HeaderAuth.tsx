@@ -3,8 +3,7 @@ import * as actions from "@/actions";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import { Bell, Mail } from "lucide-react";
 
 import { useSession } from "next-auth/react";
 import PrimaryButton from "@/components/PrimaryButton";
@@ -20,13 +19,13 @@ export default function HeaderAuth() {
       <nav className={styles.actions} aria-label="Header actions">
         <IconButton className={styles.iconButton} aria-label="Notifications">
           <Badge badgeContent={2} color="error">
-            <NotificationsNoneIcon />
+            <Bell size={20}/>
           </Badge>
         </IconButton>
 
         <IconButton className={styles.iconButton} aria-label="Messages">
           <Badge badgeContent={99} color="error">
-            <MailOutlineOutlinedIcon />
+            <Mail size={20}/>
           </Badge>
         </IconButton>
        
