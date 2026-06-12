@@ -18,7 +18,7 @@ export default function HeaderAuth() {
     authContent = (
       <nav className={styles.actions} aria-label="Header actions">
         <IconButton className={styles.iconButton} aria-label="Notifications">
-          <Badge badgeContent={2} color="error"  classes={{ badge: styles.badge }}>
+          <Badge  variant="dot" color="error"  classes={{ badge: styles.badge }}>
             <Bell size={20}/>
           </Badge>
         </IconButton>

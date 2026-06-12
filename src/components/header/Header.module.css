@@ -52,9 +52,9 @@
   color: var(--text);
 }
 .badge {
-  font-size: 0.68rem !important;
+  font-size: 0.60rem !important;
+ background-color: #EA5B5B !important;
  
- 
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-primary) !important;
  
 }
