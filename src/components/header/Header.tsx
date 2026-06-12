@@ -9,10 +9,10 @@ export default function Header() {
     <header className={styles.header}>
       <Link href="/" className={styles.logo} aria-label="Home">
         <Image
-          src="/interact-logo-lowQuality.png"
+          src="/interact_logo_transparent.png"
           alt="Interact Logo"
-          width={98}
-          height={26}
+          width={102}
+          height={24}
           priority
         />
       </Link>

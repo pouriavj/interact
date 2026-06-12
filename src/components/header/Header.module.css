@@ -35,8 +35,8 @@
 }
 
 .iconButton {
-  width: 42px !important;
-  height: 42px !important;
+  width: 36px !important;
+  height: 36px !important;
 
   border: 1px solid var(--border) !important;
   border-radius: 50% !important;
@@ -50,4 +50,11 @@
 .iconButton svg {
   font-size: 1.25rem;
   color: var(--text);
+}
+.badge {
+  font-size: 0.68rem !important;
+ 
+ 
+  font-family: "Montserrat", sans-serif;
+ 
 }

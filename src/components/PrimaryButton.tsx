@@ -1,10 +1,11 @@
 "use client";
+
 import Button from "@mui/material/Button";
 import type { ButtonProps } from "@mui/material/Button";
 
-export default function PrimaryButton({ children, type, color }: ButtonProps) {
+export default function PrimaryButton({ children, ...props }: ButtonProps) {
   return (
-    <Button variant="contained" type={type} color={color}>
+    <Button {...props} variant="contained">
       {children}
     </Button>
   );
