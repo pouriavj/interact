@@ -36,16 +36,9 @@
 .icon {
   font-size: 26px !important;
   margin-bottom: 2px;
-  color: var(--text-secondary);
-  transition: 0.2s ease;
+  color: var(--text);
+  transition: 0.15s ease;
 }
-
-/* ACTIVE STATE */
-.active {
-  color: var(--primary);
-}
-
-.active .icon {
-  color: var(--primary);
-  transform: translateY(-1px);
+.item:active .icon {
+  transform: scale(0.9);
 }
