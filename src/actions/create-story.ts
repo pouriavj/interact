@@ -1,6 +1,6 @@
 "use server";
 
 export async function createStory() {
-
-    // TODO: revalidate the homepage
+  // TODO:
+  // - revalidate: "/" (stories bar updates immediately)
 }

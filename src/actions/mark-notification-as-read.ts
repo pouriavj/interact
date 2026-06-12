@@ -1,3 +1,6 @@
 "use server";
 
-export async function markNotificationAsRead() {}
+export async function markNotificationAsRead() {
+  // TODO:
+  // - revalidate: "/activity"
+}

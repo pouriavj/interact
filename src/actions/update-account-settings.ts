@@ -1,3 +1,6 @@
 "use server";
 
-export async function updateAccountSettings() {}
+export async function updateAccountSettings() {
+  // TODO:
+  // - revalidate: "/settings"
+}

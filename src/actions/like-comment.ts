@@ -1,3 +1,6 @@
 "use server";
 
-export async function likeComment() {}
+export async function likeComment() {
+  // TODO:
+  // - revalidate: "/post/[id]"
+}

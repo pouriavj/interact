@@ -49,16 +49,8 @@ export { markMessagesAsRead } from "./mark-messages-as-read";
 /* =========================
    NOTIFICATIONS / ACTIVITY
 ========================= */
-export { getNotifications } from "./get-notifications";
-export { markNotificationAsRead } from "./mark-notification-as-read";
 
-/* =========================
-   FEED / DISCOVERY
-========================= */
-export { getHomeFeed } from "./get-home-feed";
-export { getExploreFeed } from "./get-explore-feed";
-export { search } from "./search";
-export { getTrendingPosts } from "./get-trending-posts";
+export { markNotificationAsRead } from "./mark-notification-as-read";
 
 /* =========================
    SETTINGS / ACCOUNT

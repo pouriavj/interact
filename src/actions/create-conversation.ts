@@ -1,3 +1,6 @@
 "use server";
 
-export async function createConversation() {}
+export async function createConversation() {
+  // TODO:
+  // - revalidate: "/messages"
+}

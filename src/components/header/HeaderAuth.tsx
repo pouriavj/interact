@@ -1,13 +1,13 @@
 "use client";
-
+import * as actions from "@/actions";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
-import Avatar from "@mui/material/Avatar";
+
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 
 import { useSession } from "next-auth/react";
-
+import PrimaryButton from "@/components/PrimaryButton";
 import styles from "./Header.module.css";
 
 export default function HeaderAuth() {
@@ -29,12 +29,13 @@ export default function HeaderAuth() {
             <MailOutlineOutlinedIcon />
           </Badge>
         </IconButton>
+       
       </nav>
     );
   } else {
-    authContent = (
-      <div>signup</div>
-    );
+    authContent =  <form action={actions.signIn}>
+        <PrimaryButton type="submit" children="Login with GitHub" />
+      </form>;
   }
 
   return authContent;
