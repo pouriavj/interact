@@ -16,9 +16,9 @@ export default function UserIcon(props: SVGProps<SVGSVGElement>) {
           d="M19,21V19a4,4,0,0,0-4-4H9a4,4,0,0,0-4,4v2"
           fill="none"
           stroke="#000"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <circle
           id="Ellipse_2"
@@ -29,9 +29,9 @@ export default function UserIcon(props: SVGProps<SVGSVGElement>) {
           transform="translate(8 3)"
           fill="none"
           stroke="#000"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </g>
     </svg>

@@ -16,9 +16,9 @@ export default function SearchIcon(props: SVGProps<SVGSVGElement>) {
           d="M21,21l-4.34-4.34"
           fill="none"
           stroke="#000"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <circle
           id="Ellipse_1"
@@ -29,9 +29,9 @@ export default function SearchIcon(props: SVGProps<SVGSVGElement>) {
           transform="translate(3 3)"
           fill="none"
           stroke="#000"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </g>
     </svg>
