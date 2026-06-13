@@ -2,9 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-import { House, Send, Search, User } from "lucide-react";
 import { useSession } from "next-auth/react";
+
+import HomeIcon from "@/icons/HomeIcon";
+import HomeIconFilled from "@/icons/HomeIconFilled";
+
+import MessageIcon from "@/icons/MessageIcon";
+import MessageIconFilled from "@/icons/MessageIconFilled";
+
+import SearchIcon from "@/icons/SearchIcon";
+import SearchIconFilled from "@/icons/SearchIconFilled";
+
+import UserIcon from "@/icons/UserIcon";
+import UserIconFilled from "@/icons/UserIconFilled";
 
 import { paths } from "@/paths";
 import styles from "./BottomNav.module.css";
@@ -12,15 +22,18 @@ import styles from "./BottomNav.module.css";
 const items = [
   {
     href: paths.home(),
-    Icon: House,
+    Icon: HomeIcon,
+    FilledIcon: HomeIconFilled,
   },
   {
     href: paths.messages(),
-    Icon: Send,
+    Icon: MessageIcon,
+    FilledIcon: MessageIconFilled,
   },
   {
     href: paths.explore(),
-    Icon: Search,
+    Icon: SearchIcon,
+    FilledIcon: SearchIconFilled,
   },
 ];
 
@@ -36,7 +49,8 @@ export default function BottomNav() {
     ...items,
     {
       href: profileHref,
-      Icon: User,
+      Icon: UserIcon,
+      FilledIcon: UserIconFilled,
     },
   ];
 
@@ -44,19 +58,13 @@ export default function BottomNav() {
     <nav className={styles.nav}>
       {allItems.map((item) => {
         const active =
-          pathname === item.href ||
-          pathname.startsWith(item.href + "/");
+          pathname === item.href || pathname.startsWith(item.href + "/");
 
-        const Icon = item.Icon;
+        const IconComponent = active ? item.FilledIcon : item.Icon;
 
         return (
           <Link key={item.href} href={item.href} className={styles.item}>
-            <Icon
-              className={styles.icon}
-              size={24}
-              strokeWidth={active ? 3.6 : 2}
-              color={active ? "currentColor" : "#9aa0a6"}
-            />
+            <IconComponent className={styles.icon} />
           </Link>
         );
       })}
