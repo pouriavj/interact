@@ -29,7 +29,6 @@
   color: var(--text-secondary);
   font-size: 12px;
 
-  transition: 0.2s ease;
   width: 25%;
 }
 
@@ -45,7 +44,6 @@
 .avatar {
   width: 28px !important;
   height: 28px !important;
- 
 }
 
 .item:active .avatar {
