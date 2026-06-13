@@ -87,6 +87,7 @@ export default function BottomNav() {
             {isProfileLoading ? (
               <Skeleton
                 variant="circular"
+                animation="wave"
                 width={28}
                 height={28}
                 sx={{

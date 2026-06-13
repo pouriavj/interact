@@ -46,9 +46,7 @@
   height: 28px !important;
 }
 
-.item:active .avatar {
-  transform: scale(0.9);
-}
+
 
 .avatarActive {
   outline: 2px solid black;

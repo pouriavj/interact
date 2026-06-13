@@ -12,6 +12,13 @@ export default function ProfileSkeleton() {
           width={80}
           height={80}
           animation="wave"
+           sx={{
+            bgcolor: "rgba(0, 0, 0, 0.04)",
+            "&::after": {
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
+            },
+          }}
         />
 
         <div className={styles.info}>
@@ -20,6 +27,13 @@ export default function ProfileSkeleton() {
             width={140}
             height={32}
             animation="wave"
+             sx={{
+            bgcolor: "rgba(0, 0, 0, 0.04)",
+            "&::after": {
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
+            },
+          }}
           />
 
           <Skeleton
@@ -27,6 +41,13 @@ export default function ProfileSkeleton() {
             width={220}
             height={24}
             animation="wave"
+             sx={{
+            bgcolor: "rgba(0, 0, 0, 0.04)",
+            "&::after": {
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
+            },
+          }}
           />
 
           <Skeleton
@@ -34,6 +55,13 @@ export default function ProfileSkeleton() {
             width={120}
             height={36}
             animation="wave"
+             sx={{
+            bgcolor: "rgba(0, 0, 0, 0.04)",
+            "&::after": {
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
+            },
+          }}
           />
         </div>
       </div>
@@ -43,18 +71,39 @@ export default function ProfileSkeleton() {
           variant="rounded"
           height={120}
           animation="wave"
+           sx={{
+            bgcolor: "rgba(0, 0, 0, 0.04)",
+            "&::after": {
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
+            },
+          }}
         />
 
         <Skeleton
           variant="rounded"
           height={120}
           animation="wave"
+           sx={{
+            bgcolor: "rgba(0, 0, 0, 0.04)",
+            "&::after": {
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
+            },
+          }}
         />
 
         <Skeleton
           variant="rounded"
           height={120}
           animation="wave"
+           sx={{
+            bgcolor: "rgba(0, 0, 0, 0.04)",
+            "&::after": {
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
+            },
+          }}
         />
       </div>
     </div>

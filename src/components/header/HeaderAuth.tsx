@@ -18,6 +18,7 @@ export default function HeaderAuth() {
       <div className={styles.authSkeleton}>
         <Skeleton
           variant="rounded"
+          animation="wave"
           width={92}
           height={36}
           sx={{
