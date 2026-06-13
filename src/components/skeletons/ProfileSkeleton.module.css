@@ -1,0 +1,21 @@
+.container {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.info {
+  flex: 1;
+}
+
+.posts {
+  margin-top: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

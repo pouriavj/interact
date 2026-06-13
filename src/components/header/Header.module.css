@@ -58,3 +58,8 @@
   font-family: var(--font-primary) !important;
  
 }
+
+.authSkeleton {
+  display: flex;
+  align-items: center;
+}

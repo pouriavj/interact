@@ -19,6 +19,7 @@ import UserIconFilled from "@/icons/UserIconFilled";
 
 import { paths } from "@/paths";
 import styles from "./BottomNav.module.css";
+import Skeleton from "@mui/material/Skeleton";
 
 type NavItem = {
   href: string;
@@ -72,6 +73,8 @@ export default function BottomNav() {
         const active =
           pathname === item.href || pathname.startsWith(item.href + "/");
 
+        const isProfileLoading = item.isProfile && session.status === "loading";
+
         const isLoggedInProfile =
           item.isProfile &&
           session.status === "authenticated" &&
@@ -80,18 +83,27 @@ export default function BottomNav() {
         const IconComponent = active ? item.FilledIcon : item.Icon;
 
         return (
-          <Link key={item.href} href={item.href} className={styles.item}>
-            {isLoggedInProfile ? (
+          <Link key={item.href} href={item.href} className={styles.item} >
+            {isProfileLoading ? (
+              <Skeleton
+                variant="circular"
+                width={28}
+                height={28}
+                sx={{
+                  bgcolor: "rgba(0, 0, 0, 0.04)",
+                  "&::after": {
+                    background:
+                      "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
+                  },
+                }}
+              />
+            ) : isLoggedInProfile ? (
               <Avatar
                 src={session.data!.user!.image!}
                 alt={session.data!.user!.name || "Profile"}
-                sx={{
-                  width: 28,
-                  height: 28,
-                  ...(active && {
-                    outline: "2px solid black",
-                  }),
-                }}
+                className={`${styles.avatar} ${
+                  active ? styles.avatarActive : ""
+                }`}
               />
             ) : (
               <IconComponent className={styles.icon} />

@@ -8,33 +8,54 @@ import { Bell, Mail } from "lucide-react";
 import { useSession } from "next-auth/react";
 import PrimaryButton from "@/components/PrimaryButton";
 import styles from "./Header.module.css";
+import Skeleton from "@mui/material/Skeleton";
 
 export default function HeaderAuth() {
   const session = useSession();
   let authContent: React.ReactNode;
   if (session.status === "loading") {
-    authContent = null;
+    return (
+      <div className={styles.authSkeleton}>
+        <Skeleton
+          variant="rounded"
+          width={92}
+          height={36}
+          sx={{
+            bgcolor: "rgba(0, 0, 0, 0.04)",
+            "&::after": {
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)",
+            },
+          }}
+        />
+      </div>
+    );
   } else if (session.data?.user) {
     authContent = (
       <nav className={styles.actions} aria-label="Header actions">
         <IconButton className={styles.iconButton} aria-label="Notifications">
-          <Badge  variant="dot" color="error"  classes={{ badge: styles.badge }}>
-            <Bell size={20}/>
+          <Badge variant="dot" color="error" classes={{ badge: styles.badge }}>
+            <Bell size={20} />
           </Badge>
         </IconButton>
 
         <IconButton className={styles.iconButton} aria-label="Messages">
-          <Badge badgeContent={99} color="error"  classes={{ badge: styles.badge }}>
-            <Mail size={20}/>
+          <Badge
+            badgeContent={99}
+            color="error"
+            classes={{ badge: styles.badge }}
+          >
+            <Mail size={20} />
           </Badge>
         </IconButton>
-       
       </nav>
     );
   } else {
-    authContent =  <form action={actions.signIn}>
+    authContent = (
+      <form action={actions.signIn}>
         <PrimaryButton type="submit" children="Login with GitHub" />
-      </form>;
+      </form>
+    );
   }
 
   return authContent;

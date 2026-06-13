@@ -42,3 +42,16 @@
 .item:active .icon {
   transform: scale(0.9);
 }
+.avatar {
+  width: 28px !important;
+  height: 28px !important;
+ 
+}
+
+.item:active .avatar {
+  transform: scale(0.9);
+}
+
+.avatarActive {
+  outline: 2px solid black;
+}
