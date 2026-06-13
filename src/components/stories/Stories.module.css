@@ -1,0 +1,93 @@
+.wrapper {
+  width: 100%;
+  padding: var(--space-3) 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.container {
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  padding: 0 var(--space-3);
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+}
+
+/* =========================
+   STORY RING (GRADIENT)
+========================= */
+.avatarWrapper {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  padding: 2px;
+
+  background: linear-gradient(
+    45deg,
+    var(--warning),
+    var(--primary-400),
+    var(--danger),
+    var(--primary-700),
+    var(--info)
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================
+   AVATAR
+========================= */
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--surface);
+}
+
+/* =========================
+   "YOU" STORY
+========================= */
+.you {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid var(--surface);
+}
+
+.plus {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--text-secondary);
+}
+
+/* =========================
+   NAME
+========================= */
+.name {
+  font-size: 12px;
+  margin-top: var(--space-2);
+  color: var(--text-secondary);
+
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
