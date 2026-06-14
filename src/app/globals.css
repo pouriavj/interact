@@ -7,8 +7,8 @@
   /* =========================
    BACKGROUND / SURFACES
 ========================== */
-  --bg: #e6e9ef;
-  --bg-elevated:  #f6f7f9;
+  --bg:  #f6f7f9;
+  --bg-elevated: #e6e9ef  ;
 
   --surface: #ffffff;
   --surface-hover: #e2e5ec;

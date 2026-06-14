@@ -53,9 +53,14 @@ export default function HeaderAuth() {
     );
   } else {
     authContent = (
-      <form action={actions.signIn}>
-        <PrimaryButton type="submit" children="Login with GitHub" />
-      </form>
+      <div>
+        <form action={() => actions.signIn("github")}>
+          <PrimaryButton type="submit" children="Login with GitHub" />
+        </form>
+        <form action={() => actions.signIn("google")}>
+          <PrimaryButton type="submit" children="Login with Google" />
+        </form>
+      </div>
     );
   }
 
