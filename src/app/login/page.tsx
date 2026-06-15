@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import styles from "@/components/login/Login.module.css";
 import AuthButtons from "@/components/login/AuthButtons";
 import EmailForm from "@/components/login/EmailForm";
+import Image from "next/image";
 
 export default async function LoginPage() {
   const session = await auth();
@@ -14,7 +15,14 @@ export default async function LoginPage() {
   return (
     <main className={styles.page}>
       <div className={styles.card}>
-        <div className={styles.logo}>i</div>
+        <Image
+          className={styles.logo}
+          src="/interact-logo-nobg.png"
+          alt="Interact Logo"
+          width={160}
+          height={160}
+          priority
+        />
 
         <h1>Welcome to Interact</h1>
 
