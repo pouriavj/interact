@@ -1,58 +1,91 @@
 .page {
   min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
+  background: var(--surface);
   padding: var(--space-4);
 }
 
 .card {
   width: 100%;
 
-  padding: var(--space-8);
-
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-}
 
-
-
-.card h1 {
-  margin: 0;
-  text-align: center;
-}
-
-.card p {
-  margin: 0;
-  color: var(--text-secondary);
-  text-align: center;
+  padding: var(--space-8);
 }
 
 .logo {
   align-self: center;
+
+}
+
+.card h1 {
+  margin: 0;
+
+  text-align: center;
+
+ 
+
+  font-size: 2.2rem;
+
+  line-height: 1.1;
+}
+
+.card p {
+  margin: 0;
+
+  text-align: center;
+
+  color: var(--text-secondary);
+
+  line-height: 1.6;
+}
+
+.card small {
+  text-align: center;
+
+  color: var(--text-muted);
+
+  line-height: 1.5;
 }
 
 .socialButton {
-  width: 100%;
+  height: 56px !important;
 
-  height: 52px;
+  border-radius: var(--radius-lg) !important;
 
-  border: 1px solid var(--border);
+  border: 1px solid var(--border) !important;
 
-  border-radius: var(--radius-md);
+  background: var(--surface) !important;
 
-  background: var(--surface);
+  color: var(--text) !important;
 
-  cursor: pointer;
+  text-transform: none !important;
 
-  font: inherit;
+  font-weight: 600 !important;
 
-  transition: 0.2s;
+  font-size: 0.95rem !important;
+
+  box-shadow: none !important;
+
+  justify-content: center;
+
+  transition: 0.2s ease !important;
 }
 
 .socialButton:hover {
-  background: var(--surface-hover);
+  background: var(--surface-hover) !important;
+
+  border-color: var(--primary) !important;
+}
+.socialButton:active {
+  background: var(--surface-hover) !important;
+
+  border-color: var(--primary) !important;
 }
 
 .divider {
@@ -61,6 +94,12 @@
   gap: var(--space-3);
 
   color: var(--text-muted);
+
+  font-size: 0.85rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
 }
 
 .divider::before,
@@ -77,44 +116,60 @@
 .form {
   display: flex;
   flex-direction: column;
+
   gap: var(--space-3);
 }
 
-.input {
-  height: 52px;
+.textField :global(.MuiOutlinedInput-root) {
+  height: 56px;
 
-  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
 
-  border-radius: var(--radius-md);
-
-  padding: 0 16px;
-
-  background: var(--bg-elevated);
-
-  outline: none;
+  background: var(--surface);
 }
 
-.input:focus {
+.textField :global(.MuiOutlinedInput-notchedOutline) {
+  border-color: var(--border);
+}
+
+.textField
+  :global(.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline) {
   border-color: var(--primary);
 }
 
+.textField
+  :global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
+  border-color: var(--primary);
+  border-width: 2px;
+}
+
 .primaryButton {
-  height: 52px;
+  height: 56px !important;
 
-  border: none;
+  border-radius: var(--radius-lg) !important;
 
-  border-radius: var(--radius-md);
+  background: var(--primary) !important;
 
-  background: var(--primary);
+  color: white !important;
 
-  color: white;
+  text-transform: none !important;
 
-  cursor: pointer;
+  font-weight: 700 !important;
 
-  font: inherit;
-  font-weight: 600;
+  box-shadow: none !important;
+
+  transition: 0.2s ease !important;
 }
 
 .primaryButton:hover {
-  opacity: 0.95;
+  background: var(--primary-300) !important;
+}
+.primaryButton:active {
+  background: var(--primary-300) !important;
+}
+
+.primaryButton:disabled {
+  background: var(--gray-200) !important;
+
+  color: var(--gray-500) !important;
 }
