@@ -1,8 +1,16 @@
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import styles from "@/components/login/Login.module.css";
 import AuthButtons from "@/components/login/AuthButtons";
 import EmailForm from "@/components/login/EmailForm";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const session = await auth();
+
+  if (session) {
+    redirect("/");
+  }
+
   return (
     <main className={styles.page}>
       <div className={styles.card}>
