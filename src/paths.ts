@@ -7,12 +7,12 @@ export const paths = {
     return "/explore";
   },
 
-  signIn() {
-    return "/signin";
+  login() {
+    return "/login";
   },
-
-  signUp() {
-    return "/signup";
+  
+  verifyRequest() {
+    return "/verify-request";
   },
 
   activity() {

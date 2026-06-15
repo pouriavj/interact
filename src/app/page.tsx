@@ -7,3 +7,5 @@ export default async function Home() {
     </div>
   );
 }
+
+// ToDO: Use Section , Main, SEO Friendly html tags.

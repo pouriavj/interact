@@ -55,7 +55,7 @@ export default function BottomNav() {
 
   const profileHref = session.data?.user
     ? paths.profile(session.data.user.name || "me")
-    : paths.signIn();
+    : paths.login();
 
   const allItems: NavItem[] = [
     ...items,

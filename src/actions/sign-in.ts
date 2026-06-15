@@ -2,8 +2,21 @@
 
 import * as auth from "@/auth";
 
-type Provider = "google" | "github";
+export async function signInWithProvider(provider: "google" | "github") {
+  await auth.signIn(provider, {
+    redirectTo: "/",
+  });
+}
 
-export async function signIn(provider: Provider) {
-  return auth.signIn(provider);
+export async function signInWithEmail(formData: FormData) {
+  const email = formData.get("email");
+
+  if (typeof email !== "string") {
+    return;
+  }
+
+  await auth.signIn("resend", {
+    email,
+    redirectTo: "/",
+  });
 }

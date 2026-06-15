@@ -54,10 +54,10 @@ export default function HeaderAuth() {
   } else {
     authContent = (
       <div>
-        <form action={() => actions.signIn("github")}>
+        <form action={() => actions.signInWithProvider("github")}>
           <PrimaryButton type="submit" children="Login with GitHub" />
         </form>
-        <form action={() => actions.signIn("google")}>
+        <form action={() => actions.signInWithProvider("google")}>
           <PrimaryButton type="submit" children="Login with Google" />
         </form>
       </div>
