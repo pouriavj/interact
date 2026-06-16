@@ -10,10 +10,10 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import * as actions from "@/actions";
 
 import styles from "./Login.module.css";
+import Image from "next/image";
 
 export default function AuthButtons() {
-  const [pending, startTransition] =
-    useTransition();
+  const [pending, startTransition] = useTransition();
 
   return (
     <>
@@ -21,11 +21,11 @@ export default function AuthButtons() {
         fullWidth
         disabled={pending}
         className={styles.socialButton}
-        startIcon={<GoogleIcon />}
+        startIcon={
+          <Image src="/google-logo.svg" alt="" width={20} height={20} />
+        }
         onClick={() =>
-          startTransition(() =>
-            actions.signInWithProvider("google")
-          )
+          startTransition(() => actions.signInWithProvider("google"))
         }
       >
         Continue with Google
@@ -37,9 +37,7 @@ export default function AuthButtons() {
         className={styles.socialButton}
         startIcon={<GitHubIcon />}
         onClick={() =>
-          startTransition(() =>
-            actions.signInWithProvider("github")
-          )
+          startTransition(() => actions.signInWithProvider("github"))
         }
       >
         Continue with GitHub

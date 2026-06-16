@@ -115,7 +115,8 @@
    GLOBAL BEHAVIOR FIXES
 ========================== */
 html {
-  font-family: var(--font-primary);
+  height: 100%;
+   font-family: var(--font-primary);
 }
 body {
   margin: 0;
@@ -123,6 +124,7 @@ body {
   background: var(--bg);
   padding-bottom: 70px;
   color: var(--text);
+  height: 100%;
 }
 
 * {
