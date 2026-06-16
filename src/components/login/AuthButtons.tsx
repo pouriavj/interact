@@ -22,7 +22,7 @@ export default function AuthButtons() {
         disabled={pending}
         className={styles.socialButton}
         startIcon={
-          <Image src="/google-logo.svg" alt="" width={20} height={20} />
+          <Image src="/google-logo.svg" alt="google" width={20} height={20} />
         }
         onClick={() =>
           startTransition(() => actions.signInWithProvider("google"))
@@ -35,7 +35,7 @@ export default function AuthButtons() {
         fullWidth
         disabled={pending}
         className={styles.socialButton}
-        startIcon={<GitHubIcon />}
+        startIcon={<Image src="/github-logo.svg" alt="github" width={20} height={20} />}
         onClick={() =>
           startTransition(() => actions.signInWithProvider("github"))
         }

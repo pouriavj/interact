@@ -2,7 +2,7 @@
   height: 100vh;
 
   background: var(--surface);
-  padding: var(--space-8);
+  padding: var(--space-6);
 }
 
 .card {
