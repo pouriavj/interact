@@ -63,7 +63,7 @@
   height: 56px !important;
 
   border: 1px solid var(--border-regular) !important;
-
+  border-radius: 0 !important;
   background: var(--mono-white) !important;
 
   color: var(--mono-black) !important;
@@ -145,6 +145,7 @@
   height: 56px;
   font-family: var(--font-primary) !important;
   background: var(--mono-white);
+  border-radius: 0 !important;
 }
 
 .textField :global(.MuiOutlinedInput-notchedOutline) {
@@ -170,7 +171,7 @@
 
 .primaryButton {
   height: 56px !important;
-
+  border-radius: 0 !important;
   background: var(--mono-black) !important;
 
   color: var(--mono-white) !important;
