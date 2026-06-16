@@ -6,11 +6,12 @@ import IconButton from "@mui/material/IconButton";
 import { Bell, Mail } from "lucide-react";
 
 import { useSession } from "next-auth/react";
-import PrimaryButton from "@/components/PrimaryButton";
+
 import styles from "./Header.module.css";
 import Skeleton from "@mui/material/Skeleton";
 import { paths } from "@/paths";
 import SecondaryButton from "../SecondaryButton";
+import { LogIn } from "lucide-react";
 
 export default function HeaderAuth() {
   const session = useSession();
@@ -21,7 +22,7 @@ export default function HeaderAuth() {
         <Skeleton
           variant="rounded"
           animation="wave"
-          width={92}
+          width={86}
           height={36}
           sx={{
             bgcolor: "rgba(0, 0, 0, 0.04)",
@@ -55,7 +56,11 @@ export default function HeaderAuth() {
     );
   } else {
     authContent = (
-      <SecondaryButton className={styles.headerButton} href={paths.login()}>
+      <SecondaryButton
+        className={styles.headerButton}
+        href={paths.login()}
+        startIcon={<LogIn size={18} />}
+      >
         Sign in
       </SecondaryButton>
     );
