@@ -1,13 +1,19 @@
 .page {
-  height: 100vh;
+  min-height: 100vh;
 
   background: var(--surface);
+
   padding: var(--space-6);
 }
 
 .card {
   width: 100%;
+  max-width: 420px;
+
+  margin: 0 auto;
+
   padding-top: var(--space-6);
+
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -25,6 +31,8 @@
   font-size: 2.2rem;
 
   line-height: 1.1;
+
+  font-weight: 700;
 }
 
 .card p {
@@ -45,16 +53,20 @@
   line-height: 1.5;
 }
 
-.socialButton {
-  height: 56px !important;
+/* =========================
+   SOCIAL BUTTONS
+========================== */
 
-  border-radius: var(--radius-lg) !important;
+.socialButton {
+  position: relative !important;
+
+  height: 56px !important;
 
   border: 1px solid var(--border) !important;
 
-  background: var(--surface) !important;
+  background: var(--mono-white) !important;
 
-  color: var(--text) !important;
+  color: var(--mono-black) !important;
 
   text-transform: none !important;
 
@@ -64,8 +76,11 @@
 
   box-shadow: none !important;
 
-  transition: 0.2s ease !important;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease !important;
 }
+
 .socialButton :global(.MuiButton-startIcon) {
   position: absolute;
 
@@ -73,16 +88,19 @@
 
   margin: 0;
 }
-.socialButton:hover {
-  background: var(--surface-hover) !important;
 
-  border-color: var(--primary) !important;
-}
-.socialButton:active {
-  background: var(--surface-hover) !important;
 
-  border-color: var(--primary) !important;
+/* Hover only on desktop/laptop */
+@media (hover: hover) and (pointer: fine) {
+  .socialButton:hover {
+    background: var(--mono-surface-hover) !important;
+
+    border-color: var(--mono-border-hover) !important;
+  }
 }
+/* =========================
+   DIVIDER
+========================== */
 
 .divider {
   display: flex;
@@ -109,6 +127,10 @@
   background: var(--border);
 }
 
+/* =========================
+   FORM
+========================== */
+
 .form {
   display: flex;
   flex-direction: column;
@@ -116,12 +138,14 @@
   gap: var(--space-3);
 }
 
+/* =========================
+   INPUT
+========================== */
+
 .textField :global(.MuiOutlinedInput-root) {
   height: 56px;
 
-  border-radius: var(--radius-lg);
-
-  background: var(--surface);
+  background: var(--mono-white);
 }
 
 .textField :global(.MuiOutlinedInput-notchedOutline) {
@@ -129,24 +153,28 @@
 }
 
 .textField
-  :global(.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline) {
-  border-color: var(--primary);
+  :global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
+  border-color: var(--mono-black);
+
+  border-width: 1px;
 }
 
-.textField
-  :global(.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
-  border-color: var(--primary);
-  border-width: 2px;
+@media (hover: hover) and (pointer: fine) {
+  .textField
+    :global(.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline) {
+    border-color: var(--mono-black);
+  }
 }
+/* =========================
+   PRIMARY BUTTON
+========================== */
 
 .primaryButton {
   height: 56px !important;
 
-  border-radius: var(--radius-lg) !important;
+  background: var(--mono-black) !important;
 
-  background: var(--primary) !important;
-
-  color: white !important;
+  color: var(--mono-white) !important;
 
   text-transform: none !important;
 
@@ -154,18 +182,17 @@
 
   box-shadow: none !important;
 
-  transition: 0.2s ease !important;
+  transition: background-color 0.15s ease !important;
 }
 
-.primaryButton:hover {
-  background: var(--primary-300) !important;
-}
-.primaryButton:active {
-  background: var(--primary-300) !important;
-}
 
+@media (hover: hover) and (pointer: fine) {
+  .primaryButton:hover {
+    background: var(--mono-black-soft) !important;
+  }
+}
 .primaryButton:disabled {
-  background: var(--gray-200) !important;
+  background: var(--mono-disabled-bg) !important;
 
-  color: var(--gray-500) !important;
+  color: var(--mono-disabled-text) !important;
 }

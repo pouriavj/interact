@@ -1,47 +1,64 @@
 "use client";
 
-import { useTransition } from "react";
-
-import Button from "@mui/material/Button";
-
-import GoogleIcon from "@mui/icons-material/Google";
-import GitHubIcon from "@mui/icons-material/GitHub";
-
+import { useState } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 import * as actions from "@/actions";
-
 import styles from "./Login.module.css";
 import Image from "next/image";
+import SecondaryButton from "../SecondaryButton";
 
 export default function AuthButtons() {
-  const [pending, startTransition] = useTransition();
+  const [pendingProvider, setPendingProvider] = useState<"google" | "github" | null>(null);
+
+  const handleLogin = (provider: "google" | "github") => {
+    if (pendingProvider) return;
+
+    setPendingProvider(provider);
+    actions.signInWithProvider(provider);
+  };
+
+  const isLoading = (provider: "google" | "github") =>
+    pendingProvider === provider;
 
   return (
     <>
-      <Button
+      <SecondaryButton
         fullWidth
-        disabled={pending}
         className={styles.socialButton}
+        onClick={() => handleLogin("google")}
+        style={{
+          pointerEvents: pendingProvider ? "none" : "auto",
+          opacity: pendingProvider && !isLoading("google") ? 0.6 : 1,
+        }}
         startIcon={
-          <Image src="/google-logo.svg" alt="google" width={20} height={20} />
-        }
-        onClick={() =>
-          startTransition(() => actions.signInWithProvider("google"))
+          isLoading("google") ? (
+            <CircularProgress size={18} />
+          ) : (
+            <Image src="/google-logo.svg" alt="google" width={20} height={20} />
+          )
         }
       >
-        Continue with Google
-      </Button>
+        {isLoading("google") ? "Redirecting..." : "Continue with Google"}
+      </SecondaryButton>
 
-      <Button
+      <SecondaryButton
         fullWidth
-        disabled={pending}
         className={styles.socialButton}
-        startIcon={<Image src="/github-logo.svg" alt="github" width={20} height={20} />}
-        onClick={() =>
-          startTransition(() => actions.signInWithProvider("github"))
+        onClick={() => handleLogin("github")}
+        style={{
+          pointerEvents: pendingProvider ? "none" : "auto",
+          opacity: pendingProvider && !isLoading("github") ? 0.6 : 1,
+        }}
+        startIcon={
+          isLoading("github") ? (
+            <CircularProgress size={18} />
+          ) : (
+            <Image src="/github-logo.svg" alt="github" width={20} height={20} />
+          )
         }
       >
-        Continue with GitHub
-      </Button>
+        {isLoading("github") ? "Redirecting..." : "Continue with GitHub"}
+      </SecondaryButton>
     </>
   );
 }

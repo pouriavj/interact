@@ -7,8 +7,8 @@
   /* =========================
    BACKGROUND / SURFACES
 ========================== */
-  --bg:  #f6f7f9;
-  --bg-elevated: #e6e9ef  ;
+  --bg: #f6f7f9;
+  --bg-elevated: #e6e9ef;
 
   --surface: #ffffff;
   --surface-hover: #e2e5ec;
@@ -87,10 +87,10 @@
   /* =========================
      RADIUS
   ========================== */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 
   /* =========================
      SHADOWS
@@ -109,6 +109,25 @@
   --space-5: 20px;
   --space-6: 24px;
   --space-8: 32px;
+
+  /* =========================
+   MONOCHROME UI COLORS
+========================== */
+
+  --mono-white: #ffffff;
+
+  --mono-black: #000000;
+  --mono-black-soft: #111111;
+  --mono-black-active: #222222;
+
+  --mono-surface-hover: #f8f8f8;
+  --mono-surface-active: #f3f3f3;
+
+  --mono-border-hover: #d6d6d6;
+  --mono-border-active: #cfcfcf;
+
+  --mono-disabled-bg: #d9d9d9;
+  --mono-disabled-text: #7a7a7a;
 }
 
 /* =========================
@@ -116,7 +135,7 @@
 ========================== */
 html {
   height: 100%;
-   font-family: var(--font-primary);
+  font-family: var(--font-primary);
 }
 body {
   margin: 0;
