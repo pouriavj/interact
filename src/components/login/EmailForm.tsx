@@ -17,30 +17,21 @@ export default function EmailForm() {
   const {
     register,
     handleSubmit,
-    formState: {
-      errors,
-      isValid,
-      isSubmitting,
-    },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<FormValues>({
     mode: "onChange",
   });
 
-  const onSubmit = async (
-    data: FormValues
-  ) => {
+  const onSubmit = async (data: FormValues) => {
     const formData = new FormData();
 
     formData.append("email", data.email);
 
     await actions.signInWithEmail(formData);
   };
-
+  const isBlocked = !isValid || isSubmitting;
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={styles.form}
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <TextField
         fullWidth
         placeholder="Enter your email"
@@ -50,10 +41,8 @@ export default function EmailForm() {
         {...register("email", {
           required: "Email is required",
           pattern: {
-            value:
-              /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message:
-              "Please enter a valid email",
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message: "Please enter a valid email",
           },
         })}
       />
@@ -61,12 +50,13 @@ export default function EmailForm() {
       <Button
         fullWidth
         type="submit"
-        disabled={!isValid || isSubmitting}
         className={styles.primaryButton}
+        style={{
+          pointerEvents: isBlocked ? "none" : "auto",
+          opacity: isBlocked ? 0.4 : 1,
+        }}
       >
-        {isSubmitting
-          ? "Sending..."
-          : "Send Magic Link"}
+        {isSubmitting ? "Sending..." : "Send Magic Link"}
       </Button>
     </form>
   );
