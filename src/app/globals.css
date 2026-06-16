@@ -26,6 +26,7 @@
    BORDER / DIVIDERS
 ========================== */
   --border: #e2e5ec;
+  --border-regular: #cfd5df;
   --border-strong: #626262;
 
   /* =========================
@@ -140,7 +141,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background: var(--surface);
   padding-bottom: 70px;
   color: var(--text);
   height: 100%;

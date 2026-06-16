@@ -9,6 +9,8 @@ import { useSession } from "next-auth/react";
 import PrimaryButton from "@/components/PrimaryButton";
 import styles from "./Header.module.css";
 import Skeleton from "@mui/material/Skeleton";
+import { paths } from "@/paths";
+import SecondaryButton from "../SecondaryButton";
 
 export default function HeaderAuth() {
   const session = useSession();
@@ -53,14 +55,9 @@ export default function HeaderAuth() {
     );
   } else {
     authContent = (
-      <div>
-        <form action={() => actions.signInWithProvider("github")}>
-          <PrimaryButton type="submit" children="Login with GitHub" />
-        </form>
-        <form action={() => actions.signInWithProvider("google")}>
-          <PrimaryButton type="submit" children="Login with Google" />
-        </form>
-      </div>
+      <SecondaryButton className={styles.headerButton} href={paths.login()}>
+        Sign in
+      </SecondaryButton>
     );
   }
 

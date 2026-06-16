@@ -62,7 +62,7 @@
 
   height: 56px !important;
 
-  border: 1px solid var(--border) !important;
+  border: 1px solid var(--border-regular) !important;
 
   background: var(--mono-white) !important;
 
@@ -73,7 +73,7 @@
   font-weight: 600 !important;
 
   font-size: 0.95rem !important;
-
+  font-family: var(--font-primary) !important;
   box-shadow: none !important;
 
   transition:
@@ -143,12 +143,12 @@
 
 .textField :global(.MuiOutlinedInput-root) {
   height: 56px;
-
+  font-family: var(--font-primary) !important;
   background: var(--mono-white);
 }
 
 .textField :global(.MuiOutlinedInput-notchedOutline) {
-  border-color: var(--border);
+  border-color: var(--border-regular);
 }
 
 .textField
@@ -176,7 +176,7 @@
   color: var(--mono-white) !important;
 
   text-transform: none !important;
-
+  font-family: var(--font-primary) !important;
   font-weight: 700 !important;
 
   box-shadow: none !important;

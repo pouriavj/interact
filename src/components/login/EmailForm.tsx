@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import * as actions from "@/actions";
 
 import styles from "./Login.module.css";
+import PrimaryButton from "../PrimaryButton";
 
 type FormValues = {
   email: string;
@@ -47,7 +48,7 @@ export default function EmailForm() {
         })}
       />
 
-      <Button
+      <PrimaryButton
         fullWidth
         type="submit"
         className={styles.primaryButton}
@@ -57,7 +58,7 @@ export default function EmailForm() {
         }}
       >
         {isSubmitting ? "Sending..." : "Send Magic Link"}
-      </Button>
+      </PrimaryButton>
     </form>
   );
 }
