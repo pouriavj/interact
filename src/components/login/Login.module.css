@@ -200,7 +200,6 @@
 
 .verifyCard {
   width: 100%;
-  max-width: 420px;
 
   margin: 20dvh auto;
 
@@ -214,7 +213,7 @@
 }
 
 .verifyIconWrapper {
-  height: 16dvh;
+  height: 14dvh;
   width: 100%;
 
   display: flex;
