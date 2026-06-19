@@ -7,7 +7,7 @@
 
 .container {
   display: flex;
-  gap: var(--space-4);
+  gap: var(--space-3);
   overflow-x: auto;
   padding: 0 var(--space-3);
   scrollbar-width: none;
@@ -21,25 +21,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 70px;
 }
 
 /* =========================
    STORY RING (GRADIENT)
 ========================= */
 .avatarWrapper {
-  width: 62px;
-  height: 62px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  padding: 2px;
+  padding: 1px;
 
   background: linear-gradient(
     45deg,
     var(--warning),
-    var(--primary-400),
-    var(--danger),
-    var(--primary-700),
-    var(--info)
+    hsl(39, 100%, 80%),
+    var(--primary-500),
+    var(--secondary-300),
+    var(--danger)
   );
 
   display: flex;
@@ -53,15 +52,15 @@
 .avatar {
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--surface);
+  border: 4px solid var(--surface);
 }
 
 /* =========================
    "YOU" STORY
 ========================= */
 .you {
-  width: 56px;
-  height: 56px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   background: var(--bg-elevated);
 
@@ -69,13 +68,10 @@
   align-items: center;
   justify-content: center;
 
-  border: 2px solid var(--surface);
+  border: 4px solid var(--surface);
 }
-
 .plus {
-  font-size: 22px;
-  font-weight: bold;
-  color: var(--text-secondary);
+  color: var(--surface);
 }
 
 /* =========================

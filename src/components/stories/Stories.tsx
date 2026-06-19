@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "./Stories.module.css";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const stories = [
   { id: 1, name: "You", image: null },
@@ -22,13 +23,13 @@ export default function Stories() {
                 <Image
                   src={story.image}
                   alt={story.name}
-                  width={56}
-                  height={56}
+                  width={68}
+                  height={68}
                   className={styles.avatar}
                 />
               ) : (
                 <div className={styles.you}>
-                  <span className={styles.plus}>+</span>
+                  <AddCircleIcon className={styles.plus} />
                 </div>
               )}
             </div>
