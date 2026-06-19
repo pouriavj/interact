@@ -23,8 +23,8 @@ export default function Stories() {
                 <Image
                   src={story.image}
                   alt={story.name}
-                  width={78}
-                  height={78}
+                  width={74}
+                  height={74}
                   className={styles.avatar}
                 />
               ) : (
