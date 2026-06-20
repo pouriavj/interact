@@ -17,6 +17,45 @@ model User {
 
   accounts      Account[]
   sessions      Session[]
+
+  // Social
+stories Story[]
+
+followers Follow[] @relation("Following")
+following Follow[] @relation("Follower")
+}
+enum StoryMediaType {
+  IMAGE
+  VIDEO
+}
+model Follow {
+  id String @id @default(cuid())
+
+  followerId String
+  followingId String
+
+  createdAt DateTime @default(now())
+
+  follower User @relation("Follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+}
+
+model Story {
+  id String @id @default(cuid())
+
+  mediaUrl String
+  mediaType StoryMediaType
+
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
 }
 model Account {
   id                String  @id @default(cuid())
