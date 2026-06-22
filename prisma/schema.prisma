@@ -8,6 +8,16 @@ datasource db {
  
 }
 
+enum AccountVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum StoryMediaType {
+  IMAGE
+  VIDEO
+}
+
 model User {
   id            String   @id @default(cuid())
   name          String?
@@ -15,19 +25,17 @@ model User {
   emailVerified DateTime?
   image         String?
 
-  accounts      Account[]
-  sessions      Session[]
+  visibility AccountVisibility @default(PUBLIC)
 
-  // Social
-stories Story[]
+  accounts   Account[]
+  sessions   Session[]
 
-followers Follow[] @relation("Following")
-following Follow[] @relation("Follower")
+  stories    Story[]
+
+  followers  Follow[] @relation("Following")
+  following  Follow[] @relation("Follower")
 }
-enum StoryMediaType {
-  IMAGE
-  VIDEO
-}
+
 model Follow {
   id String @id @default(cuid())
 

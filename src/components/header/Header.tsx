@@ -2,8 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 import HeaderAuth from "./HeaderAuth";
-import Stories from "@/components/stories/Stories"
+import Stories from "@/components/stories/Stories";
 import styles from "./Header.module.css";
+
 
 export default function Header() {
   return (
@@ -18,9 +19,11 @@ export default function Header() {
             priority
           />
         </Link>
-
+        
         <HeaderAuth />
+ 
       </div>
+      
       <Stories />
     </header>
   );

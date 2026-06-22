@@ -9,7 +9,17 @@
 * 🟢 You can import this file directly.
 */
 
+export const AccountVisibility = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE'
+} as const
+
+export type AccountVisibility = (typeof AccountVisibility)[keyof typeof AccountVisibility]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const StoryMediaType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+} as const
+
+export type StoryMediaType = (typeof StoryMediaType)[keyof typeof StoryMediaType]

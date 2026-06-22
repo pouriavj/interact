@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "./providers";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import localFont from "next/font/local";
+import { auth } from "@/auth";
 
 const satoshi = localFont({
   src: "../../public/fonts/Satoshi-Regular.woff2",
@@ -64,17 +65,18 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+   const session = await auth();
   return (
     <html lang="en" className={`${satoshi.variable} ${bevellier.variable}`}>
       <body>
-        <Providers>
+        <Providers session={session}>
           {children}
-          <BottomNav />
+          <BottomNav session={session} />
         </Providers>
       </body>
     </html>

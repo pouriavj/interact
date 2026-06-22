@@ -1,7 +1,10 @@
+"use server";
+
+import { unstable_cache } from "next/cache";
 import { prisma } from "@/lib/prisma";
 
-export async function getUserProfile(username: string) {
-  const user = await prisma.user.findFirst({
+async function getUserProfileBase(username: string) {
+  return prisma.user.findFirst({
     where: {
       name: username,
     },
@@ -12,6 +15,14 @@ export async function getUserProfile(username: string) {
       image: true,
     },
   });
+}
 
-  return user;
+export async function getUserProfile(username: string) {
+  return unstable_cache(
+    () => getUserProfileBase(username),
+    [`user-profile-${username}`],
+    {
+      revalidate: 60,
+    }
+  )();
 }

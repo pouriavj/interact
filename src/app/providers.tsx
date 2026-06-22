@@ -1,13 +1,21 @@
 "use client";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+
+import { ReactNode } from "react";
 import { SessionProvider } from "next-auth/react";
+import type { Session } from "next-auth";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
 interface ProvidersProps {
-  children: React.ReactNode;
+  children: ReactNode;
+  session: Session | null;
 }
-export default function Providers({ children }: ProvidersProps) {
+
+export default function Providers({
+  children,
+  session,
+}: ProvidersProps) {
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
     </SessionProvider>
   );
