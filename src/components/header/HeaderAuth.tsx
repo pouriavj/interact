@@ -10,10 +10,13 @@ import { Bell, Mail, LogIn } from "lucide-react";
 import styles from "./Header.module.css";
 import { paths } from "@/paths";
 import SecondaryButton from "../SecondaryButton";
+import HeaderAuthSkeleton from "../skeletons/HeaderAuthSkeleton";
 
 export default function HeaderAuth() {
-  const { data: session } = useSession();
-
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <HeaderAuthSkeleton />;
+  }
   if (session?.user) {
     return (
       <nav className={styles.actions} aria-label="Header actions">

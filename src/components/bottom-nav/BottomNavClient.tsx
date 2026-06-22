@@ -1,7 +1,5 @@
 "use client";
 
-import type { Session } from "next-auth";
-
 import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,6 +18,8 @@ import UserIconFilled from "@/icons/UserIconFilled";
 
 import { paths } from "@/paths";
 import styles from "./BottomNav.module.css";
+import { useSession } from "next-auth/react";
+import ProfileNavSkeleton from "../skeletons/ProfileNavSkeleton";
 
 type NavItem = {
   href: string;
@@ -49,13 +49,8 @@ const items: NavItem[] = [
   },
 ];
 
-interface BottomNavClientProps {
-  session: Session | null;
-}
-
-export default function BottomNavClient({
-  session,
-}: BottomNavClientProps) {
+export default function BottomNavClient() {
+  const { data: session, status } = useSession();
   const pathname = usePathname();
 
   const profileHref = session?.user
@@ -82,14 +77,22 @@ export default function BottomNavClient({
 
         return (
           <Link key={item.href} href={item.href} className={styles.item}>
-            {item.isProfile && session?.user?.image ? (
-              <Avatar
-                src={session.user.image}
-                alt={session.user.name ?? "Profile"}
-                className={`${styles.avatar} ${
-                  active ? styles.avatarActive : ""
-                }`}
-              />
+            {item.isProfile ? (
+              status === "loading" ? (
+                <ProfileNavSkeleton />
+              ) : session?.user?.image ? (
+                <Avatar
+                  src={session.user.image}
+                  alt={session.user.name ?? "Profile"}
+                  className={`${styles.avatar} ${
+                    active ? styles.avatarActive : ""
+                  }`}
+                />
+              ) : active ? (
+                <UserIconFilled className={styles.icon} />
+              ) : (
+                <UserIcon className={styles.icon} />
+              )
             ) : (
               <IconComponent className={styles.icon} />
             )}

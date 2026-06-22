@@ -57,7 +57,7 @@ export default function EmailForm() {
           opacity: isBlocked ? 0.4 : 1,
         }}
       >
-        {isSubmitting ? "Sending..." : "Send Magic Link"}
+        {isSubmitting ? "Sending..." : "Continue"}
       </PrimaryButton>
     </form>
   );

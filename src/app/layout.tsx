@@ -4,7 +4,6 @@ import "./globals.css";
 import Providers from "./providers";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import localFont from "next/font/local";
-import { auth } from "@/auth";
 
 const satoshi = localFont({
   src: "../../public/fonts/Satoshi-Regular.woff2",
@@ -70,13 +69,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-   const session = await auth();
   return (
     <html lang="en" className={`${satoshi.variable} ${bevellier.variable}`}>
       <body>
-        <Providers session={session}>
+        <Providers>
           {children}
-          <BottomNav session={session} />
+          <BottomNav />
         </Providers>
       </body>
     </html>
