@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getUserProfile } from "@/queries/get-user-profile";
+import { getUserProfile } from "@/queries";
 import ProfileClient from "@/components/profile/ProfileClient";
 
 export default async function ProfilePage({

@@ -3,7 +3,8 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState, useTransition } from "react";
 import StoriesClient from "./StoriesClient";
-import { fetchFollowingStories } from "@/queries/stories/fetch-following-stories";
+import { fetchFollowingStories } from "@/queries";
+import StoriesSkeleton from "../skeletons/StoriesSkeleton";
 
 type Story = {
   id: string;
@@ -20,8 +21,10 @@ type Props = {
 
 export default function StoriesHydrator({ initialStories }: Props) {
   const { data: session, status } = useSession();
-
-  const [stories, setStories] = useState(initialStories);
+  const isAuthenticated = status === "authenticated";
+  const [stories, setStories] = useState(
+    isAuthenticated ? null : initialStories,   // Initial Stories if user is logged in, is null and if not is public stories
+  );
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -35,6 +38,7 @@ export default function StoriesHydrator({ initialStories }: Props) {
       setStories(data);
     });
   }, [status, session?.user?.id]);
-
+  if (status === "loading") return <StoriesSkeleton />;   // If auth is loading show skeleton 
+  if (isPending) return null   // If auth is done but query is pending show nothing, if not authenticated show public stories
   return <StoriesClient stories={stories} />;
 }

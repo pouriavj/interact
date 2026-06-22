@@ -13,10 +13,10 @@ type Story = {
   };
 };
 
-export default function StoriesClient({ stories }: { stories: Story[] }) {
+export default function StoriesClient({ stories }: { stories: Story[] | null }) {
   return (
     <>
-      {stories.map((story) => (
+      {stories && stories.map((story) => (
         <div key={story.id} className={styles.story}>
           <div className={styles.avatarWrapper}>
             {story.user.image ? (

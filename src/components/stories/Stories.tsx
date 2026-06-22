@@ -1,6 +1,6 @@
 // Stories.tsx (server component)
 import styles from "./Stories.module.css";
-import { fetchPublicStories } from "@/queries/stories/fetch-Public-stories";
+import { fetchPublicStories } from "@/queries";
 import StoriesHydrator from "./StoriesHydrator";
 
 export default async function Stories() {
