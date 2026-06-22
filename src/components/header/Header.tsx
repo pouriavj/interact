@@ -4,6 +4,8 @@ import Image from "next/image";
 import HeaderAuth from "./HeaderAuth";
 import Stories from "@/components/stories/Stories";
 import styles from "./Header.module.css";
+import { Suspense } from "react";
+import StoriesSkeleton from "../skeletons/StoriesSkeleton";
 
 
 export default function Header() {
@@ -23,8 +25,9 @@ export default function Header() {
         <HeaderAuth />
  
       </div>
-      
+      <Suspense fallback={<StoriesSkeleton />}>
       <Stories />
+      </Suspense>
     </header>
   );
 }

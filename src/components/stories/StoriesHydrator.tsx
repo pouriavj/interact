@@ -39,6 +39,6 @@ export default function StoriesHydrator({ initialStories }: Props) {
     });
   }, [status, session?.user?.id]);
   if (status === "loading") return <StoriesSkeleton />;   // If auth is loading show skeleton 
-  if (isPending) return null   // If auth is done but query is pending show nothing, if not authenticated show public stories
+  if (isPending) return <StoriesSkeleton />  // If auth is done but query is pending show nothing, if not authenticated show public stories
   return <StoriesClient stories={stories} />;
 }
