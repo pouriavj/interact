@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 import StoriesClient from "./StoriesClient";
 import { fetchFollowingStories } from "@/queries";
 import StoriesSkeleton from "../skeletons/StoriesSkeleton";
@@ -21,11 +21,10 @@ type Props = {
 
 export default function StoriesHydrator({ initialStories }: Props) {
   const { data: session, status } = useSession();
-  const isAuthenticated = status === "authenticated";
-  const [stories, setStories] = useState(
-    isAuthenticated ? null : initialStories,   // Initial Stories if user is logged in, is null and if not is public stories
+
+  const [followingStories, setFollowingStories] = useState<Story[] | null>(
+    null,
   );
-  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     if (status !== "authenticated") return;
@@ -33,12 +32,40 @@ export default function StoriesHydrator({ initialStories }: Props) {
     const userId = session?.user?.id;
     if (!userId) return;
 
-    startTransition(async () => {
+    let cancelled = false;
+
+    async function loadStories() {
+      if (!userId) return;
+
       const data = await fetchFollowingStories(userId);
-      setStories(data);
-    });
+
+      if (!cancelled) {
+        setFollowingStories(data);
+      }
+    }
+
+    loadStories();
+
+    return () => {
+      cancelled = true;
+    };
   }, [status, session?.user?.id]);
-  if (status === "loading") return <StoriesSkeleton />;   // If auth is loading show skeleton 
-  if (isPending) return <StoriesSkeleton />  // If auth is done but query is pending show nothing, if not authenticated show public stories
-  return <StoriesClient stories={stories} />;
+
+  // Session is still loading
+  if (status === "loading") {
+    return <StoriesSkeleton />;
+  }
+
+  // Logged in, but following stories haven't arrived yet
+  if (status === "authenticated" && followingStories === null) {
+    return <StoriesSkeleton />;
+  }
+
+  // Logged in
+  if (status === "authenticated") {
+    return <StoriesClient stories={followingStories} />;
+  }
+
+  // Guest
+  return <StoriesClient stories={initialStories} />;
 }
