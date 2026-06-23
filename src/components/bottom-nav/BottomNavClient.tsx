@@ -2,7 +2,7 @@
 
 import Avatar from "@mui/material/Avatar";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import HomeIcon from "@/icons/HomeIcon";
 import HomeIconFilled from "@/icons/HomeIconFilled";
@@ -15,10 +15,9 @@ import SearchIconFilled from "@/icons/SearchIconFilled";
 
 import UserIcon from "@/icons/UserIcon";
 import UserIconFilled from "@/icons/UserIconFilled";
-
+import { useSelectedLayoutSegment } from "next/navigation";
 import { paths } from "@/paths";
 import styles from "./BottomNav.module.css";
-import { useSession } from "next-auth/react";
 import ProfileNavSkeleton from "../skeletons/ProfileNavSkeleton";
 
 type NavItem = {
@@ -49,9 +48,66 @@ const items: NavItem[] = [
   },
 ];
 
+// -------------------- helpers --------------------
+
+function isActive(pathname: string, href: string): boolean {
+  if (pathname === href) {
+    return true;
+  } else if (pathname.startsWith(href + "/")) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function renderNavIcon(
+  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>,
+  FilledIcon: React.ComponentType<React.SVGProps<SVGSVGElement>>,
+  active: boolean,
+) {
+  const IconComponent = active ? FilledIcon : Icon;
+  return <IconComponent />;
+}
+
+function renderProfile({
+  status,
+  session,
+  active,
+  styles,
+}: {
+  status: string;
+  session: any;
+  active: boolean;
+  styles: any;
+}) {
+  if (status === "loading") {
+    return <ProfileNavSkeleton />;
+  }
+
+  if (session?.user?.image) {
+    return (
+      <Avatar
+        src={session.user.image}
+        alt={session.user.name ?? "Profile"}
+        className={`${styles.avatar} ${active ? styles.avatarActive : ""}`}
+      />
+    );
+  }
+
+  if (active) {
+    return <UserIconFilled className={styles.icon} />;
+  }
+
+  return <UserIcon className={styles.icon} />;
+}
+
+// -------------------- component --------------------
+
 export default function BottomNavClient() {
   const { data: session, status } = useSession();
-  const pathname = usePathname();
+
+  const segment = useSelectedLayoutSegment();
+  const pathname = segment ? `/${segment}` : "/";
 
   const profileHref = session?.user
     ? paths.profile(session.user.name || "me")
@@ -70,32 +126,22 @@ export default function BottomNavClient() {
   return (
     <nav className={styles.nav}>
       {allItems.map((item) => {
-        const active =
-          pathname === item.href || pathname.startsWith(item.href + "/");
+        let active = isActive(pathname, item.href);
 
-        const IconComponent = active ? item.FilledIcon : item.Icon;
+        if (item.isProfile && segment === "profile") {
+          active = true;
+        }
 
         return (
           <Link key={item.href} href={item.href} className={styles.item}>
-            {item.isProfile ? (
-              status === "loading" ? (
-                <ProfileNavSkeleton />
-              ) : session?.user?.image ? (
-                <Avatar
-                  src={session.user.image}
-                  alt={session.user.name ?? "Profile"}
-                  className={`${styles.avatar} ${
-                    active ? styles.avatarActive : ""
-                  }`}
-                />
-              ) : active ? (
-                <UserIconFilled className={styles.icon} />
-              ) : (
-                <UserIcon className={styles.icon} />
-              )
-            ) : (
-              <IconComponent className={styles.icon} />
-            )}
+            {item.isProfile
+              ? renderProfile({
+                  status,
+                  session,
+                  active,
+                  styles,
+                })
+              : renderNavIcon(item.Icon, item.FilledIcon, active)}
           </Link>
         );
       })}
