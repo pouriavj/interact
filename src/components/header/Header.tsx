@@ -25,9 +25,9 @@ export default function Header() {
         <HeaderAuth />
  
       </div>
-      <Suspense fallback={<StoriesSkeleton />}>
+      
       <Stories />
-      </Suspense>
+    
     </header>
   );
 }
