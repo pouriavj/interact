@@ -26,6 +26,7 @@ export default function StoriesClient({ stories }: { stories: Story[] | null }) 
                 width={74}
                 height={74}
                 className={styles.avatar}
+                priority
               />
             ) : (
               <div className={styles.you}>
