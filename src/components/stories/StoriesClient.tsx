@@ -34,6 +34,7 @@ export default function StoriesClient({
 }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const router = useRouter();
+  const [viewedStories, setViewedStories] = useState<string[]>([]);
 
   function handleYourStoryClick() {
     if (!currentUser) {
@@ -65,9 +66,19 @@ export default function StoriesClient({
         <div
           key={story.id}
           className={styles.story}
-          onClick={() => setSelectedIndex(index)}
+          onClick={() => {
+            if (!viewedStories.includes(story.id)) {
+              setViewedStories([...viewedStories, story.id]);
+            }
+
+            setSelectedIndex(index);
+          }}
         >
-          <div className={styles.avatarWrapper}>
+          <div
+            className={`${styles.avatarWrapper} ${
+              viewedStories.includes(story.id) ? styles.viewedAvatarWrapper : ""
+            }`}
+          >
             {story.user.image && (
               <Avatar
                 src={story.user.image}
