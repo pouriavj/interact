@@ -6,8 +6,11 @@ import StoriesClient from "./StoriesClient";
 import { fetchFollowingStories } from "@/queries";
 import StoriesSkeleton from "../skeletons/StoriesSkeleton";
 
-type Story = {
+export type Story = {
   id: string;
+  mediaUrl: string;
+  mediaType: "IMAGE" | "VIDEO";
+
   user: {
     id: string;
     name: string | null;

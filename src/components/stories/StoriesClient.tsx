@@ -1,12 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import styles from "./Stories.module.css";
 import Avatar from "@mui/material/Avatar";
+import { useState } from "react";
+import StoryViewer from "./StoryViewer";
 
 type Story = {
   id: string;
+  mediaUrl: string;
+  mediaType: "IMAGE" | "VIDEO";
+
   user: {
     id: string;
     name: string | null;
@@ -25,6 +29,7 @@ export default function StoriesClient({
   stories: Story[] | null;
   currentUser: CurrentUser;
 }) {
+  const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   return (
     <>
       {/* Your Story */}
@@ -43,7 +48,11 @@ export default function StoriesClient({
 
       {/* Stories */}
       {stories?.map((story) => (
-        <div key={story.id} className={styles.story}>
+        <div
+          key={story.id}
+          className={styles.story}
+          onClick={() => setSelectedStory(story)}
+        >
           <div className={styles.avatarWrapper}>
             {story.user.image && (
               <Avatar
@@ -58,6 +67,12 @@ export default function StoriesClient({
           <span className={styles.name}>{story.user.name}</span>
         </div>
       ))}
+      {selectedStory && (
+        <StoryViewer
+          story={selectedStory}
+          onClose={() => setSelectedStory(null)}
+        />
+      )}
     </>
   );
 }
