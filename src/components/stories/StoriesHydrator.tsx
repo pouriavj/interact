@@ -62,10 +62,23 @@ export default function StoriesHydrator({ initialStories }: Props) {
   }
 
   // Logged in
-  if (status === "authenticated") {
-    return <StoriesClient stories={followingStories} />;
-  }
+ if (status === "authenticated") {
+  return (
+    <StoriesClient
+      stories={followingStories}
+      currentUser={{
+        name: session.user?.name,
+        image: session.user?.image,
+      }}
+    />
+  );
+}
 
   // Guest
-  return <StoriesClient stories={initialStories} />;
+ return (
+  <StoriesClient
+    stories={initialStories}
+    currentUser={null}
+  />
+);
 }
