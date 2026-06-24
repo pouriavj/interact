@@ -6,10 +6,11 @@ import Avatar from "@mui/material/Avatar";
 import { useState } from "react";
 import StoryViewer from "./StoryViewer";
 
-type Story = {
+export type Story = {
   id: string;
   mediaUrl: string;
   mediaType: "IMAGE" | "VIDEO";
+  createdAt: Date;
 
   user: {
     id: string;
