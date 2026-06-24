@@ -70,13 +70,19 @@ export default function StoriesClient({
       {selectedIndex !== null && stories && (
         <StoryViewer
           story={stories[selectedIndex]}
-          onClose={() => {
+          onNext={() => {
             if (selectedIndex < stories.length - 1) {
               setSelectedIndex(selectedIndex + 1);
             } else {
               setSelectedIndex(null);
             }
           }}
+          onPrev={() => {
+            if (selectedIndex > 0) {
+              setSelectedIndex(selectedIndex - 1);
+            }
+          }}
+          onClose={() => setSelectedIndex(null)}
         />
       )}
     </>
