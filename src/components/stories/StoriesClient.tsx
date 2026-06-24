@@ -5,6 +5,8 @@ import styles from "./Stories.module.css";
 import Avatar from "@mui/material/Avatar";
 import { useState } from "react";
 import StoryViewer from "./StoryViewer";
+import { useRouter } from "next/navigation";
+import { paths } from "@/paths";
 
 export type Story = {
   id: string;
@@ -31,10 +33,21 @@ export default function StoriesClient({
   currentUser: CurrentUser;
 }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const router = useRouter();
+
+  function handleYourStoryClick() {
+    if (!currentUser) {
+      router.push(paths.login());
+      return;
+    }
+
+    // Later:
+    // setShowAddStory(true);
+  }
   return (
     <>
       {/* Your Story */}
-      <div className={styles.story}>
+      <div className={styles.story} onClick={handleYourStoryClick}>
         <div className={`${styles.avatarWrapper} ${styles.yourAvatarWrapper}`}>
           <Avatar
             src={currentUser?.image ?? "/default-avatar2.png"}
