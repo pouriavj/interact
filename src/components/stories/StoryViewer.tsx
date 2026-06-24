@@ -6,6 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import StoryProgress from "./StoryProgress";
 import styles from "./StoryViewer.module.css";
 import type { Story } from "./StoriesHydrator";
+import { useEffect, useState } from "react";
 
 type Props = {
   story: Story;
@@ -35,6 +36,11 @@ function formatStoryTime(createdAt: Date | string) {
 }
 
 export default function StoryViewer({ story, onClose, onNext, onPrev }: Props) {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(false);
+  }, [story.id]);
   return (
     <div className={styles.overlay}>
       <StoryProgress duration={30000} onFinish={onNext} />
@@ -61,13 +67,21 @@ export default function StoryViewer({ story, onClose, onNext, onPrev }: Props) {
       </div>
 
       {story.mediaType === "IMAGE" && (
-        <Image
-          src={story.mediaUrl}
-          alt=""
-          fill
-          className={styles.image}
-          priority
-        />
+        <>
+          {!loaded && <div className={styles.loading} />}
+
+          <Image
+            key={story.id}
+            src={story.mediaUrl}
+            alt=""
+            fill
+            className={`${styles.image} ${
+              loaded ? styles.imageVisible : styles.imageHidden
+            }`}
+            priority
+            onLoad={() => setLoaded(true)}
+          />
+        </>
       )}
     </div>
   );

@@ -37,6 +37,7 @@
 
 .image {
   object-fit: cover;
+  z-index: 2;
 }
 
 .closeButton {
@@ -94,4 +95,19 @@
 .time {
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
+}
+.loading {
+  position: absolute;
+  inset: 0;
+  background: black;
+  z-index: 1;
+}
+
+.imageHidden {
+  opacity: 0;
+}
+
+.imageVisible {
+  opacity: 1;
+  transition: opacity 450ms ease;
 }

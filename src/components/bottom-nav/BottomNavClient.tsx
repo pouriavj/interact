@@ -66,7 +66,7 @@ function renderNavIcon(
   active: boolean,
 ) {
   const IconComponent = active ? FilledIcon : Icon;
-  return <IconComponent />;
+  return <IconComponent className={styles.icon} />;
 }
 
 function renderProfile({
