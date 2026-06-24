@@ -29,7 +29,7 @@ export default function StoriesClient({
   stories: Story[] | null;
   currentUser: CurrentUser;
 }) {
-  const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   return (
     <>
       {/* Your Story */}
@@ -47,11 +47,11 @@ export default function StoriesClient({
       </div>
 
       {/* Stories */}
-      {stories?.map((story) => (
+      {stories?.map((story, index) => (
         <div
           key={story.id}
           className={styles.story}
-          onClick={() => setSelectedStory(story)}
+          onClick={() => setSelectedIndex(index)}
         >
           <div className={styles.avatarWrapper}>
             {story.user.image && (
@@ -67,10 +67,16 @@ export default function StoriesClient({
           <span className={styles.name}>{story.user.name}</span>
         </div>
       ))}
-      {selectedStory && (
+      {selectedIndex !== null && stories && (
         <StoryViewer
-          story={selectedStory}
-          onClose={() => setSelectedStory(null)}
+          story={stories[selectedIndex]}
+          onClose={() => {
+            if (selectedIndex < stories.length - 1) {
+              setSelectedIndex(selectedIndex + 1);
+            } else {
+              setSelectedIndex(null);
+            }
+          }}
         />
       )}
     </>

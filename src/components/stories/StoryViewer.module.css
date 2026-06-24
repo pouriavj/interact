@@ -1,31 +1,31 @@
-.overlay{
-    position:fixed;
-    inset:0;
+.overlay {
+  position: fixed;
+  inset: 0;
 
-    background:black;
+  background: black;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    z-index:9999;
+  z-index: 9999;
 }
 
-.header{
-    position:absolute;
+.header {
+  position: absolute;
 
-    top:24px;
-    left:16px;
+  top: 24px;
+  left: 16px;
 
-    display:flex;
-    align-items:center;
-    gap:12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-    z-index:10;
+  z-index: 10;
 
-    color:white;
+  color: white;
 }
 
-.image{
-    object-fit:contain;
+.image {
+  object-fit: cover;
 }
