@@ -1,0 +1,161 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: black;
+
+  z-index: 9999;
+}
+
+.header {
+  position: absolute;
+
+  top: 24px;
+  left: 16px;
+  right: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: white;
+}
+
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 36px;
+  height: 36px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: background 0.2s;
+}
+
+/* Mobile active */
+@media (hover: none) {
+  .closeButton:active {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+/* Desktop hover */
+@media (hover: hover) and (pointer: fine) {
+  .closeButton:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.textField :global(.MuiOutlinedInput-root) {
+  border-radius: 0;
+}
+
+.textField :global(.MuiInputBase-input) {
+  color: var(--mono-white);
+}
+
+.textField :global(.MuiInputLabel-root) {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.textField :global(.MuiInputLabel-root.Mui-focused) {
+  color: var(--mono-white);
+}
+
+.textField :global(.MuiOutlinedInput-root fieldset) {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .textField :global(.MuiOutlinedInput-root:hover fieldset) {
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+}
+
+.textField :global(.MuiOutlinedInput-root.Mui-focused fieldset) {
+  border-color: var(--primary);
+}
+
+.form {
+  width: min(460px, 92vw);
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  padding: 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+ 
+
+  background: #111;
+}
+.title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.uploadSection {
+  margin-top: 8px;
+}
+
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  gap: 14px;
+
+  padding: 32px 24px;
+
+  border: 2px dashed var(--border);
+ 
+
+  background: var(--bg);
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.uploadContent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.uploadTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.uploadSubtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}

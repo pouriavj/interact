@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import StoryViewer from "./StoryViewer";
 import { useRouter } from "next/navigation";
 import { paths } from "@/paths";
+import AddStoryViewer from "./AddStoryViewer";
 
 export type Story = {
   id: string;
@@ -35,6 +36,7 @@ export default function StoriesClient({
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const router = useRouter();
   const [viewedStories, setViewedStories] = useState<string[]>([]);
+  const [showAddStory, setShowAddStory] = useState(false);
 
   useEffect(() => {
     if (selectedIndex === null || !stories) return;
@@ -51,9 +53,8 @@ export default function StoriesClient({
       router.push(paths.login());
       return;
     }
-
-    // Later:
-    // setShowAddStory(true);
+    // If user is authenticated
+    setShowAddStory(true);
   }
   return (
     <>
@@ -96,6 +97,7 @@ export default function StoriesClient({
           <span className={styles.name}>{story.user.name}</span>
         </div>
       ))}
+      {/* Show story */}
       {selectedIndex !== null && stories && (
         <StoryViewer
           story={stories[selectedIndex]}
@@ -113,6 +115,10 @@ export default function StoriesClient({
           }}
           onClose={() => setSelectedIndex(null)}
         />
+      )}
+      {/* Add story */}
+      {showAddStory && (
+        <AddStoryViewer onClose={() => setShowAddStory(false)} />
       )}
     </>
   );
