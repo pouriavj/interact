@@ -35,10 +35,10 @@
   border-radius: 50%;
 
   background: linear-gradient(
-    45deg,
+    -55deg,
     var(--warning),
-    hsl(39, 100%, 80%),
-    var(--primary-500),
+    rgb(255, 231, 92),
+    var(--primary-200),
     var(--secondary-300),
     var(--danger)
   );
