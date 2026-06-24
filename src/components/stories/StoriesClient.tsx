@@ -3,7 +3,7 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import styles from "./Stories.module.css";
 import Avatar from "@mui/material/Avatar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StoryViewer from "./StoryViewer";
 import { useRouter } from "next/navigation";
 import { paths } from "@/paths";
@@ -36,6 +36,16 @@ export default function StoriesClient({
   const router = useRouter();
   const [viewedStories, setViewedStories] = useState<string[]>([]);
 
+  useEffect(() => {
+    if (selectedIndex === null || !stories) return;
+
+    const storyId = stories[selectedIndex].id;
+
+    setViewedStories((prev) =>
+      prev.includes(storyId) ? prev : [...prev, storyId],
+    );
+  }, [selectedIndex, stories]);
+
   function handleYourStoryClick() {
     if (!currentUser) {
       router.push(paths.login());
@@ -66,13 +76,7 @@ export default function StoriesClient({
         <div
           key={story.id}
           className={styles.story}
-          onClick={() => {
-            if (!viewedStories.includes(story.id)) {
-              setViewedStories([...viewedStories, story.id]);
-            }
-
-            setSelectedIndex(index);
-          }}
+          onClick={() => setSelectedIndex(index)}
         >
           <div
             className={`${styles.avatarWrapper} ${
