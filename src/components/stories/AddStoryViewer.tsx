@@ -216,7 +216,7 @@ export default function AddStoryViewer({ onClose }: Props) {
 
                         backgroundColor: preview
                           ? "var(--blur)"
-                          : "var(--primary)",
+                          : "var(--mono-black)",
 
                         "@media (hover: hover) and (pointer: fine)": {
                           "&:hover": {
