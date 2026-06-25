@@ -228,7 +228,7 @@
   text-align: center;
 }
 .previewMode {
-  background: transparent !important;
+  background: var(--blur-100) !important;
 }
 .previewModeText{
   color: var(--surface);
