@@ -37,7 +37,6 @@ export { uploadAvatar } from "./upload-avatar";
 ========================= */
 export { createStory } from "./create-story";
 export { deleteStory } from "./delete-story";
-export { viewStory } from "./view-story";
 
 /* =========================
    MESSAGES

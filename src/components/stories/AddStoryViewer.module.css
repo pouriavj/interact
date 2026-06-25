@@ -5,9 +5,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  flex-direction: column;
   background: black;
-
+  
   z-index: 9999;
 }
 
@@ -59,35 +59,81 @@
     background: rgba(255, 255, 255, 0.15);
   }
 }
-
 .textField :global(.MuiOutlinedInput-root) {
   border-radius: 0;
+  color: #fff;
+  background: transparent;
 }
 
 .textField :global(.MuiInputBase-input) {
-  color: var(--mono-white);
+  color: #fff;
+  background: transparent;
+  -webkit-text-fill-color: #fff;
+}
+
+.textField :global(.MuiInputBase-input::placeholder) {
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .textField :global(.MuiInputLabel-root) {
-  color: rgba(255, 255, 255, 0.65);
+  color: #fff;
 }
 
 .textField :global(.MuiInputLabel-root.Mui-focused) {
-  color: var(--mono-white);
+  color: var(--primary);
 }
 
 .textField :global(.MuiOutlinedInput-root fieldset) {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: #fff;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .textField :global(.MuiOutlinedInput-root:hover fieldset) {
-    border-color: rgba(255, 255, 255, 0.45);
+    border-color: var(--border);
   }
 }
 
 .textField :global(.MuiOutlinedInput-root.Mui-focused fieldset) {
   border-color: var(--primary);
+}
+
+/* Remove browser autofill white background */
+.textField :global(input:-webkit-autofill),
+.textField :global(input:-webkit-autofill:hover),
+.textField :global(input:-webkit-autofill:focus),
+.textField :global(input:-webkit-autofill:active) {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 999999s ease-in-out 0s;
+}
+
+/* Disabled */
+.textField :global(.MuiOutlinedInput-root.Mui-disabled) {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.textField :global(.MuiOutlinedInput-root.Mui-disabled fieldset) {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Helper text */
+.textField :global(.MuiFormHelperText-root) {
+  margin-left: 0;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Error */
+.textField :global(.MuiFormHelperText-root.Mui-error) {
+  color: var(--danger);
+}
+
+.textField :global(.MuiOutlinedInput-root.Mui-error fieldset) {
+  border-color: var(--danger);
+}
+
+.textField :global(.MuiInputLabel-root.Mui-error) {
+  color: var(--danger);
 }
 
 .form {
@@ -158,4 +204,35 @@
   font-size: 0.9rem;
   line-height: 1.5;
   color: var(--text-secondary);
+}
+.errorContainer {
+  height: 26px;
+}
+
+.error {
+  margin: 0;
+  text-align: center;
+  color: var(--danger);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.error:not(:empty) {
+  opacity: 1;
+}
+.serverError {
+  margin: 0;
+  color:  var(--danger);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+}
+.previewMode {
+  background: transparent !important;
+}
+.previewModeText{
+  color: var(--surface);
+}
+.previewModeCard {
+  background: var(--blur);
 }
