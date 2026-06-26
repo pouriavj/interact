@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { redirect } from "next/navigation";
 
 export async function createStory(
   prevState: { message: string },
@@ -33,13 +34,7 @@ export async function createStory(
       };
     }
 
-    if (
-      ![
-        "image/png",
-        "image/jpeg",
-        "image/webp",
-      ].includes(file.type)
-    ) {
+    if (!["image/png", "image/jpeg", "image/webp"].includes(file.type)) {
       return {
         message: "Invalid image type.",
       };
@@ -52,8 +47,7 @@ export async function createStory(
     }
 
     const header = formData.get("header")?.toString() ?? "";
-    const subHeader =
-      formData.get("subHeader")?.toString() ?? "";
+    const subHeader = formData.get("subHeader")?.toString() ?? "";
 
     //---------------------------------------
     // Upload image
@@ -76,9 +70,7 @@ export async function createStory(
         mediaUrl: blob.url,
         mediaType: "IMAGE",
 
-        expiresAt: new Date(
-          Date.now() + 24 * 60 * 60 * 1000,
-        ),
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
 
         userId: session.user.id,
 
@@ -89,10 +81,6 @@ export async function createStory(
     });
 
     revalidatePath("/");
-
-    return {
-      message: "",
-    };
   } catch (error) {
     console.error(error);
 
@@ -100,4 +88,5 @@ export async function createStory(
       message: "Something went wrong.",
     };
   }
+  redirect("/");
 }

@@ -15,6 +15,7 @@ import useActions from "@/hooks/useActions";
 import { useFormSubmission } from "@/hooks/useFormSubmission";
 
 import { useState, useEffect } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 type Props = {
   onClose: () => void;
@@ -65,214 +66,231 @@ export default function AddStoryViewer({ onClose }: Props) {
       <header className={styles.header}>
         <h2 className={styles.title}>Create Story</h2>
 
-        <button type="button" onClick={onClose} className={styles.closeButton}>
-          <CloseIcon sx={{ fontSize: 22 }} />
-        </button>
+        {!isPending && (
+          <button
+            type="button"
+            onClick={onClose}
+            className={styles.closeButton}
+          >
+            <CloseIcon sx={{ fontSize: 22 }} />
+          </button>
+        )}
       </header>
 
-      <form
-        ref={formRef}
-        className={`${styles.form} ${preview ? styles.previewMode : ""}`}
-        onSubmit={onSubmit}
-      >
-        <section className={styles.fields}>
-          <Controller
-            name="header"
-            control={control}
-            rules={{
-              maxLength: {
-                value: 80,
-                message: "Title cannot exceed 80 characters.",
-              },
-            }}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                spellCheck={false}
-                className={styles.textField}
-                label="Title (optional)"
-                fullWidth
-                error={!!errors.header}
-                helperText={errors.header?.message}
-              />
-            )}
+      {/* form */}
+      {isPending ? (
+        <div className={styles.loadingOverlay}>
+          <CircularProgress
+            size={70}
+            thickness={4}
+            sx={{ color: "var(--primary)" }}
           />
-
-          <Controller
-            name="subHeader"
-            control={control}
-            rules={{
-              maxLength: {
-                value: 150,
-                message: "Subtitle cannot exceed 150 characters.",
-              },
-            }}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                className={styles.textField}
-                spellCheck={false}
-                label="Subtitle (optional)"
-                fullWidth
-                error={!!errors.subHeader}
-                helperText={errors.subHeader?.message}
-              />
-            )}
-          />
-        </section>
-
-        <section className={styles.uploadSection}>
-          <div
-            className={`${styles.uploadContainer} ${preview ? styles.previewModeCard : ""}`}
-          >
-            <ImageOutlinedIcon
-              sx={{
-                fontSize: 56,
-                color: "var(--primary)",
-              }}
-            />
-
-            <div className={styles.uploadContent}>
-              <h3
-                className={`${styles.uploadTitle} ${preview ? styles.previewModeText : ""}`}
-              >
-                Story Image
-              </h3>
-
-              <p
-                className={`${styles.uploadSubtitle} ${preview ? styles.previewModeText : ""}`}
-              >
-                Upload a photo for your story.
-                <br />
-                Supported formats: PNG, JPG, WEBP.
-              </p>
-            </div>
+        </div>
+      ) : (
+        <form
+          ref={formRef}
+          className={`${styles.form} ${preview ? styles.previewMode : ""}`}
+          onSubmit={onSubmit}
+        >
+          <section className={styles.fields}>
             <Controller
-              name="image"
+              name="header"
               control={control}
               rules={{
-                validate: (files) => {
-                  if (!files?.length) {
-                    return "Please select an image.";
-                  }
-
-                  const file = files[0];
-
-                  if (
-                    !["image/png", "image/jpeg", "image/webp"].includes(
-                      file.type,
-                    )
-                  ) {
-                    return "Only PNG, JPG or WEBP images are allowed.";
-                  }
-
-                  if (file.size > 5 * 1024 * 1024) {
-                    return "Image must be smaller than 5MB.";
-                  }
-
-                  return true;
+                maxLength: {
+                  value: 80,
+                  message: "Title cannot exceed 80 characters.",
                 },
               }}
-              render={({ field: { onChange, ref } }) => (
-                <>
-                  <input
-                    ref={ref}
-                    hidden
-                    id="story-image"
-                    type="file"
-                    accept="image/png,image/jpeg,image/webp"
-                    name="image"
-                    onChange={(e) => {
-                      const files = e.target.files;
-
-                      onChange(files);
-
-                      if (preview) {
-                        URL.revokeObjectURL(preview);
-                      }
-
-                      if (files?.length) {
-                        setPreview(URL.createObjectURL(files[0]));
-                      } else {
-                        setPreview(null);
-                      }
-                    }}
-                  />
-
-                  <label htmlFor="story-image">
-                    <Button
-                      component="span"
-                      variant={preview ? "outlined" : "contained"}
-                      startIcon={<CloudUploadRoundedIcon />}
-                      sx={{
-                        mt: 2,
-                        px: 3,
-                        py: 1,
-                        borderRadius: 0,
-                        textTransform: "none",
-                        fontWeight: 700,
-                        color: "var(--surface)",
-                        borderColor: preview && "var(--primary-100)",
-
-                        backgroundColor: preview
-                          ? "var(--blur)"
-                          : "var(--mono-black)",
-
-                        "@media (hover: hover) and (pointer: fine)": {
-                          "&:hover": {
-                            backgroundColor: "var(--primary-300)",
-                          },
-                        },
-
-                        "@media (hover: none)": {
-                          "&:active": {
-                            backgroundColor: "var(--primary-300)",
-                          },
-                        },
-                      }}
-                    >
-                      {preview ? "Change Image" : "Choose Image"}
-                    </Button>
-                  </label>
-                </>
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  spellCheck={false}
+                  className={styles.textField}
+                  label="Title (optional)"
+                  fullWidth
+                  error={!!errors.header}
+                  helperText={errors.header?.message}
+                />
               )}
             />
-          </div>
-        </section>
 
-        {formState.message && (
-          <p className={styles.serverError}>{formState.message}</p>
-        )}
+            <Controller
+              name="subHeader"
+              control={control}
+              rules={{
+                maxLength: {
+                  value: 150,
+                  message: "Subtitle cannot exceed 150 characters.",
+                },
+              }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  className={styles.textField}
+                  spellCheck={false}
+                  label="Subtitle (optional)"
+                  fullWidth
+                  error={!!errors.subHeader}
+                  helperText={errors.subHeader?.message}
+                />
+              )}
+            />
+          </section>
 
-        <Button
-          variant="contained"
-          type="submit"
-          disabled={isPending}
-          fullWidth
-          sx={{
-            mt: 2,
-            py: 1.4,
-            borderRadius: 0,
-            textTransform: "none",
-            fontWeight: 700,
-            backgroundColor: "var(--primary)",
+          <section className={styles.uploadSection}>
+            <div
+              className={`${styles.uploadContainer} ${preview ? styles.previewModeCard : ""}`}
+            >
+              <ImageOutlinedIcon
+                sx={{
+                  fontSize: 56,
+                  color: "var(--primary)",
+                }}
+              />
 
-            "@media (hover: hover) and (pointer: fine)": {
-              "&:hover": {
-                backgroundColor: "var(--primary-300)",
+              <div className={styles.uploadContent}>
+                <h3
+                  className={`${styles.uploadTitle} ${preview ? styles.previewModeText : ""}`}
+                >
+                  Story Image
+                </h3>
+
+                <p
+                  className={`${styles.uploadSubtitle} ${preview ? styles.previewModeText : ""}`}
+                >
+                  Upload a photo for your story.
+                  <br />
+                  Supported formats: PNG, JPG, WEBP.
+                </p>
+              </div>
+              <Controller
+                name="image"
+                control={control}
+                rules={{
+                  validate: (files) => {
+                    if (!files?.length) {
+                      return "Please select an image.";
+                    }
+
+                    const file = files[0];
+
+                    if (
+                      !["image/png", "image/jpeg", "image/webp"].includes(
+                        file.type,
+                      )
+                    ) {
+                      return "Only PNG, JPG or WEBP images are allowed.";
+                    }
+
+                    if (file.size > 5 * 1024 * 1024) {
+                      return "Image must be smaller than 5MB.";
+                    }
+
+                    return true;
+                  },
+                }}
+                render={({ field: { onChange, ref } }) => (
+                  <>
+                    <input
+                      ref={ref}
+                      hidden
+                      id="story-image"
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp"
+                      name="image"
+                      onChange={(e) => {
+                        const files = e.target.files;
+
+                        onChange(files);
+
+                        if (preview) {
+                          URL.revokeObjectURL(preview);
+                        }
+
+                        if (files?.length) {
+                          setPreview(URL.createObjectURL(files[0]));
+                        } else {
+                          setPreview(null);
+                        }
+                      }}
+                    />
+
+                    <label htmlFor="story-image">
+                      <Button
+                        component="span"
+                        variant={preview ? "outlined" : "contained"}
+                        startIcon={<CloudUploadRoundedIcon />}
+                        sx={{
+                          mt: 2,
+                          px: 3,
+                          py: 1,
+                          borderRadius: 0,
+                          textTransform: "none",
+                          fontWeight: 700,
+                          color: "var(--surface)",
+                          borderColor: preview && "var(--primary-100)",
+
+                          backgroundColor: preview
+                            ? "var(--blur)"
+                            : "var(--mono-black)",
+
+                          "@media (hover: hover) and (pointer: fine)": {
+                            "&:hover": {
+                              backgroundColor: "var(--primary-300)",
+                            },
+                          },
+
+                          "@media (hover: none)": {
+                            "&:active": {
+                              backgroundColor: "var(--primary-300)",
+                            },
+                          },
+                        }}
+                      >
+                        {preview ? "Change Image" : "Choose Image"}
+                      </Button>
+                    </label>
+                  </>
+                )}
+              />
+            </div>
+          </section>
+
+          {formState.message && (
+            <p className={styles.serverError}>{formState.message}</p>
+          )}
+
+          <Button
+            variant="contained"
+            type="submit"
+            disabled={isPending}
+            fullWidth
+            sx={{
+              mt: 2,
+              py: 1.4,
+              borderRadius: 0,
+              textTransform: "none",
+              fontWeight: 700,
+              backgroundColor: "var(--primary)",
+
+              "@media (hover: hover) and (pointer: fine)": {
+                "&:hover": {
+                  backgroundColor: "var(--primary-300)",
+                },
               },
-            },
 
-            "@media (hover: none)": {
-              "&:active": {
-                backgroundColor: "var(--primary-300)",
+              "@media (hover: none)": {
+                "&:active": {
+                  backgroundColor: "var(--primary-300)",
+                },
               },
-            },
-          }}
-        >
-          {isPending ? "Publishing..." : "Publish Story"}
-        </Button>
-      </form>
+            }}
+          >
+            {isPending ? "Publishing..." : "Publish Story"}
+          </Button>
+        </form>
+      )}
       <div className={styles.errorContainer}>
         <p className={styles.error}>{errors.image?.message}</p>
       </div>

@@ -236,3 +236,15 @@
 .previewModeCard {
   background: var(--blur);
 }
+
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  background: rgba(0, 0, 0, 0.37);
+}
