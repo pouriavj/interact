@@ -15,6 +15,7 @@ export function useFormSubmission<T extends FieldValues>(
     control,
     register,
     reset,
+    watch,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<T>({
@@ -38,6 +39,7 @@ export function useFormSubmission<T extends FieldValues>(
     control,
     register,
     reset,
+    watch,
     formRef,
     onSubmit,
     errors,

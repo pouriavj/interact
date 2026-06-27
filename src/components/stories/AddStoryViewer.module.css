@@ -248,3 +248,54 @@
 
   background: rgba(0, 0, 0, 0.37);
 }
+.storyText {
+  position: fixed;
+
+  top: 18%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: min(90vw, 360px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  text-align: center;
+
+  pointer-events: none;
+
+  z-index: 1000;
+}
+
+.storyText h2 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+
+  letter-spacing: -0.02em;
+
+  text-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.75),
+    0 0 28px rgba(0, 0, 0, 0.45);
+}
+
+.storyText p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.98);
+
+  font-size: clamp(1rem, 2.8vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.55;
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.75),
+    0 0 20px rgba(0, 0, 0, 0.45);
+}

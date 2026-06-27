@@ -39,9 +39,14 @@ export default function AddStoryViewer({ onClose }: Props) {
   );
 
   const { formState, isPending } = actions.stories.create;
-
+  // preview mode
   const [preview, setPreview] = useState<string | null>(null);
-
+  // preview button
+  const [isPreviewing, setIsPreviewing] = useState(false);
+  // header watch
+  const [header, setHeader] = useState("");
+  const [subHeader, setSubHeader] = useState("");
+  console.log({ header, subHeader });
   useEffect(() => {
     return () => {
       if (preview) {
@@ -63,19 +68,21 @@ export default function AddStoryViewer({ onClose }: Props) {
           : undefined
       }
     >
-      <header className={styles.header}>
-        <h2 className={styles.title}>Create Story</h2>
+      {!isPreviewing && (
+        <header className={styles.header}>
+          <h2 className={styles.title}>Create Story</h2>
 
-        {!isPending && (
-          <button
-            type="button"
-            onClick={onClose}
-            className={styles.closeButton}
-          >
-            <CloseIcon sx={{ fontSize: 22 }} />
-          </button>
-        )}
-      </header>
+          {!isPending && (
+            <button
+              type="button"
+              onClick={onClose}
+              className={styles.closeButton}
+            >
+              <CloseIcon sx={{ fontSize: 22 }} />
+            </button>
+          )}
+        </header>
+      )}
 
       {/* form */}
       {isPending ? (
@@ -91,6 +98,9 @@ export default function AddStoryViewer({ onClose }: Props) {
           ref={formRef}
           className={`${styles.form} ${preview ? styles.previewMode : ""}`}
           onSubmit={onSubmit}
+          style={{
+            display: isPreviewing ? "none" : "flex",
+          }}
         >
           <section className={styles.fields}>
             <Controller
@@ -105,6 +115,10 @@ export default function AddStoryViewer({ onClose }: Props) {
               render={({ field }) => (
                 <TextField
                   {...field}
+                  onChange={(e) => {
+                    field.onChange(e); // keep RHF working
+                    setHeader(e.target.value); // update preview
+                  }}
                   spellCheck={false}
                   className={styles.textField}
                   label="Title (optional)"
@@ -127,6 +141,10 @@ export default function AddStoryViewer({ onClose }: Props) {
               render={({ field }) => (
                 <TextField
                   {...field}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    setSubHeader(e.target.value);
+                  }}
                   className={styles.textField}
                   spellCheck={false}
                   label="Subtitle (optional)"
@@ -290,6 +308,45 @@ export default function AddStoryViewer({ onClose }: Props) {
             {isPending ? "Publishing..." : "Publish Story"}
           </Button>
         </form>
+      )}
+      {isPreviewing && (
+        <div className={styles.storyText}>
+          {header && <h2>{header}</h2>}
+
+          {subHeader && <p>{subHeader}</p>}
+        </div>
+      )}
+      {preview && (
+        <Button
+          type="button"
+          variant="contained"
+          onClick={() => setIsPreviewing((v) => !v)}
+          sx={{
+            position: "absolute",
+            left: 16,
+            bottom: 16,
+
+            zIndex: 20,
+
+            borderRadius: 0,
+
+            textTransform: "none",
+            fontWeight: 700,
+
+            backgroundColor: "var(--blur)",
+            backdropFilter: "blur(12px)",
+
+            color: "white",
+
+            "@media (hover: hover) and (pointer: fine)": {
+              "&:hover": {
+                backgroundColor: "var(--primary-300)",
+              },
+            },
+          }}
+        >
+          {isPreviewing ? "Edit" : "Preview"}
+        </Button>
       )}
       <div className={styles.errorContainer}>
         <p className={styles.error}>{errors.image?.message}</p>
