@@ -56,13 +56,16 @@ model Story {
   mediaUrl String
   mediaType StoryMediaType
 
+  header    String?
+  subHeader String?
+
   createdAt DateTime @default(now())
   expiresAt DateTime
 
  userId String @unique
 
  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@index([expiresAt])
 }
 model Account {

@@ -28,6 +28,8 @@ export type StoryMinAggregateOutputType = {
   id: string | null
   mediaUrl: string | null
   mediaType: $Enums.StoryMediaType | null
+  header: string | null
+  subHeader: string | null
   createdAt: Date | null
   expiresAt: Date | null
   userId: string | null
@@ -37,6 +39,8 @@ export type StoryMaxAggregateOutputType = {
   id: string | null
   mediaUrl: string | null
   mediaType: $Enums.StoryMediaType | null
+  header: string | null
+  subHeader: string | null
   createdAt: Date | null
   expiresAt: Date | null
   userId: string | null
@@ -46,6 +50,8 @@ export type StoryCountAggregateOutputType = {
   id: number
   mediaUrl: number
   mediaType: number
+  header: number
+  subHeader: number
   createdAt: number
   expiresAt: number
   userId: number
@@ -57,6 +63,8 @@ export type StoryMinAggregateInputType = {
   id?: true
   mediaUrl?: true
   mediaType?: true
+  header?: true
+  subHeader?: true
   createdAt?: true
   expiresAt?: true
   userId?: true
@@ -66,6 +74,8 @@ export type StoryMaxAggregateInputType = {
   id?: true
   mediaUrl?: true
   mediaType?: true
+  header?: true
+  subHeader?: true
   createdAt?: true
   expiresAt?: true
   userId?: true
@@ -75,6 +85,8 @@ export type StoryCountAggregateInputType = {
   id?: true
   mediaUrl?: true
   mediaType?: true
+  header?: true
+  subHeader?: true
   createdAt?: true
   expiresAt?: true
   userId?: true
@@ -157,6 +169,8 @@ export type StoryGroupByOutputType = {
   id: string
   mediaUrl: string
   mediaType: $Enums.StoryMediaType
+  header: string | null
+  subHeader: string | null
   createdAt: Date
   expiresAt: Date
   userId: string
@@ -187,6 +201,8 @@ export type StoryWhereInput = {
   id?: Prisma.StringFilter<"Story"> | string
   mediaUrl?: Prisma.StringFilter<"Story"> | string
   mediaType?: Prisma.EnumStoryMediaTypeFilter<"Story"> | $Enums.StoryMediaType
+  header?: Prisma.StringNullableFilter<"Story"> | string | null
+  subHeader?: Prisma.StringNullableFilter<"Story"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Story"> | Date | string
   expiresAt?: Prisma.DateTimeFilter<"Story"> | Date | string
   userId?: Prisma.StringFilter<"Story"> | string
@@ -197,6 +213,8 @@ export type StoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   mediaUrl?: Prisma.SortOrder
   mediaType?: Prisma.SortOrder
+  header?: Prisma.SortOrderInput | Prisma.SortOrder
+  subHeader?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -211,6 +229,8 @@ export type StoryWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.StoryWhereInput | Prisma.StoryWhereInput[]
   mediaUrl?: Prisma.StringFilter<"Story"> | string
   mediaType?: Prisma.EnumStoryMediaTypeFilter<"Story"> | $Enums.StoryMediaType
+  header?: Prisma.StringNullableFilter<"Story"> | string | null
+  subHeader?: Prisma.StringNullableFilter<"Story"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Story"> | Date | string
   expiresAt?: Prisma.DateTimeFilter<"Story"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -220,6 +240,8 @@ export type StoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   mediaUrl?: Prisma.SortOrder
   mediaType?: Prisma.SortOrder
+  header?: Prisma.SortOrderInput | Prisma.SortOrder
+  subHeader?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -235,6 +257,8 @@ export type StoryScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Story"> | string
   mediaUrl?: Prisma.StringWithAggregatesFilter<"Story"> | string
   mediaType?: Prisma.EnumStoryMediaTypeWithAggregatesFilter<"Story"> | $Enums.StoryMediaType
+  header?: Prisma.StringNullableWithAggregatesFilter<"Story"> | string | null
+  subHeader?: Prisma.StringNullableWithAggregatesFilter<"Story"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Story"> | Date | string
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"Story"> | Date | string
   userId?: Prisma.StringWithAggregatesFilter<"Story"> | string
@@ -244,6 +268,8 @@ export type StoryCreateInput = {
   id?: string
   mediaUrl: string
   mediaType: $Enums.StoryMediaType
+  header?: string | null
+  subHeader?: string | null
   createdAt?: Date | string
   expiresAt: Date | string
   user: Prisma.UserCreateNestedOneWithoutStoryInput
@@ -253,6 +279,8 @@ export type StoryUncheckedCreateInput = {
   id?: string
   mediaUrl: string
   mediaType: $Enums.StoryMediaType
+  header?: string | null
+  subHeader?: string | null
   createdAt?: Date | string
   expiresAt: Date | string
   userId: string
@@ -262,6 +290,8 @@ export type StoryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   mediaUrl?: Prisma.StringFieldUpdateOperationsInput | string
   mediaType?: Prisma.EnumStoryMediaTypeFieldUpdateOperationsInput | $Enums.StoryMediaType
+  header?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subHeader?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutStoryNestedInput
@@ -271,6 +301,8 @@ export type StoryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   mediaUrl?: Prisma.StringFieldUpdateOperationsInput | string
   mediaType?: Prisma.EnumStoryMediaTypeFieldUpdateOperationsInput | $Enums.StoryMediaType
+  header?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subHeader?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -280,6 +312,8 @@ export type StoryCreateManyInput = {
   id?: string
   mediaUrl: string
   mediaType: $Enums.StoryMediaType
+  header?: string | null
+  subHeader?: string | null
   createdAt?: Date | string
   expiresAt: Date | string
   userId: string
@@ -289,6 +323,8 @@ export type StoryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   mediaUrl?: Prisma.StringFieldUpdateOperationsInput | string
   mediaType?: Prisma.EnumStoryMediaTypeFieldUpdateOperationsInput | $Enums.StoryMediaType
+  header?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subHeader?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -297,6 +333,8 @@ export type StoryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   mediaUrl?: Prisma.StringFieldUpdateOperationsInput | string
   mediaType?: Prisma.EnumStoryMediaTypeFieldUpdateOperationsInput | $Enums.StoryMediaType
+  header?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subHeader?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -311,6 +349,8 @@ export type StoryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mediaUrl?: Prisma.SortOrder
   mediaType?: Prisma.SortOrder
+  header?: Prisma.SortOrder
+  subHeader?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -320,6 +360,8 @@ export type StoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mediaUrl?: Prisma.SortOrder
   mediaType?: Prisma.SortOrder
+  header?: Prisma.SortOrder
+  subHeader?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -329,6 +371,8 @@ export type StoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mediaUrl?: Prisma.SortOrder
   mediaType?: Prisma.SortOrder
+  header?: Prisma.SortOrder
+  subHeader?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -374,6 +418,8 @@ export type StoryCreateWithoutUserInput = {
   id?: string
   mediaUrl: string
   mediaType: $Enums.StoryMediaType
+  header?: string | null
+  subHeader?: string | null
   createdAt?: Date | string
   expiresAt: Date | string
 }
@@ -382,6 +428,8 @@ export type StoryUncheckedCreateWithoutUserInput = {
   id?: string
   mediaUrl: string
   mediaType: $Enums.StoryMediaType
+  header?: string | null
+  subHeader?: string | null
   createdAt?: Date | string
   expiresAt: Date | string
 }
@@ -406,6 +454,8 @@ export type StoryUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   mediaUrl?: Prisma.StringFieldUpdateOperationsInput | string
   mediaType?: Prisma.EnumStoryMediaTypeFieldUpdateOperationsInput | $Enums.StoryMediaType
+  header?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subHeader?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -414,6 +464,8 @@ export type StoryUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   mediaUrl?: Prisma.StringFieldUpdateOperationsInput | string
   mediaType?: Prisma.EnumStoryMediaTypeFieldUpdateOperationsInput | $Enums.StoryMediaType
+  header?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subHeader?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -424,6 +476,8 @@ export type StorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   id?: boolean
   mediaUrl?: boolean
   mediaType?: boolean
+  header?: boolean
+  subHeader?: boolean
   createdAt?: boolean
   expiresAt?: boolean
   userId?: boolean
@@ -434,6 +488,8 @@ export type StorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   mediaUrl?: boolean
   mediaType?: boolean
+  header?: boolean
+  subHeader?: boolean
   createdAt?: boolean
   expiresAt?: boolean
   userId?: boolean
@@ -444,6 +500,8 @@ export type StorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   id?: boolean
   mediaUrl?: boolean
   mediaType?: boolean
+  header?: boolean
+  subHeader?: boolean
   createdAt?: boolean
   expiresAt?: boolean
   userId?: boolean
@@ -454,12 +512,14 @@ export type StorySelectScalar = {
   id?: boolean
   mediaUrl?: boolean
   mediaType?: boolean
+  header?: boolean
+  subHeader?: boolean
   createdAt?: boolean
   expiresAt?: boolean
   userId?: boolean
 }
 
-export type StoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mediaUrl" | "mediaType" | "createdAt" | "expiresAt" | "userId", ExtArgs["result"]["story"]>
+export type StoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mediaUrl" | "mediaType" | "header" | "subHeader" | "createdAt" | "expiresAt" | "userId", ExtArgs["result"]["story"]>
 export type StoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -479,6 +539,8 @@ export type $StoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     id: string
     mediaUrl: string
     mediaType: $Enums.StoryMediaType
+    header: string | null
+    subHeader: string | null
     createdAt: Date
     expiresAt: Date
     userId: string
@@ -909,6 +971,8 @@ export interface StoryFieldRefs {
   readonly id: Prisma.FieldRef<"Story", 'String'>
   readonly mediaUrl: Prisma.FieldRef<"Story", 'String'>
   readonly mediaType: Prisma.FieldRef<"Story", 'StoryMediaType'>
+  readonly header: Prisma.FieldRef<"Story", 'String'>
+  readonly subHeader: Prisma.FieldRef<"Story", 'String'>
   readonly createdAt: Prisma.FieldRef<"Story", 'DateTime'>
   readonly expiresAt: Prisma.FieldRef<"Story", 'DateTime'>
   readonly userId: Prisma.FieldRef<"Story", 'String'>

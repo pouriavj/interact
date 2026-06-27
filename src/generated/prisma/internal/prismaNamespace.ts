@@ -918,6 +918,8 @@ export const StoryScalarFieldEnum = {
   id: 'id',
   mediaUrl: 'mediaUrl',
   mediaType: 'mediaType',
+  header: 'header',
+  subHeader: 'subHeader',
   createdAt: 'createdAt',
   expiresAt: 'expiresAt',
   userId: 'userId'

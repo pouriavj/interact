@@ -46,8 +46,9 @@ export async function createStory(
       };
     }
 
-    const header = formData.get("header")?.toString() ?? "";
-    const subHeader = formData.get("subHeader")?.toString() ?? "";
+    const header = formData.get("header")?.toString().trim() || null;
+
+    const subHeader = formData.get("subHeader")?.toString().trim() || null;
 
     //---------------------------------------
     // Upload image
@@ -70,16 +71,19 @@ export async function createStory(
         mediaUrl: blob.url,
         mediaType: "IMAGE",
 
-        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        header,
+        subHeader,
+
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // Long expire time for tests
 
         userId: session.user.id,
-
-        // later:
-        // header,
-        // subHeader,
       },
     });
     revalidateTag(`own-story-${session.user.id}`, "max");
+    
+    if (session.user.name) {
+      revalidatePath(`/profile/${session.user.name}`);
+    }
     revalidatePath("/");
   } catch (error) {
     console.error(error);
