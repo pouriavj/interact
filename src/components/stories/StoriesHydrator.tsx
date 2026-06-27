@@ -11,7 +11,9 @@ export type Story = {
   mediaUrl: string;
   mediaType: "IMAGE" | "VIDEO";
   createdAt: Date;
-
+  header: string | null;
+  subHeader: string | null;
+  
   user: {
     id: string;
     name: string | null;

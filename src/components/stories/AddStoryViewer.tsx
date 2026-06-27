@@ -46,7 +46,7 @@ export default function AddStoryViewer({ onClose }: Props) {
   // header watch
   const [header, setHeader] = useState("");
   const [subHeader, setSubHeader] = useState("");
-  console.log({ header, subHeader });
+
   useEffect(() => {
     return () => {
       if (preview) {
@@ -68,19 +68,17 @@ export default function AddStoryViewer({ onClose }: Props) {
           : undefined
       }
     >
-      {!isPreviewing && (
+      {!isPreviewing && !isPending && (
         <header className={styles.header}>
           <h2 className={styles.title}>Create Story</h2>
 
-          {!isPending && (
-            <button
-              type="button"
-              onClick={onClose}
-              className={styles.closeButton}
-            >
-              <CloseIcon sx={{ fontSize: 22 }} />
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={onClose}
+            className={styles.closeButton}
+          >
+            <CloseIcon sx={{ fontSize: 22 }} />
+          </button>
         </header>
       )}
 
@@ -309,7 +307,7 @@ export default function AddStoryViewer({ onClose }: Props) {
           </Button>
         </form>
       )}
-      {isPreviewing && (
+      {(isPreviewing || isPending) && (
         <div className={styles.storyText}>
           {header && <h2>{header}</h2>}
 

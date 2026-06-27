@@ -66,6 +66,15 @@ export default function StoryViewer({ story, onClose, onNext, onPrev }: Props) {
         </button>
       </div>
 
+      <div
+        className={`${styles.storyText} ${
+          loaded ? styles.storyTextVisible : styles.storyTextHidden
+        }`}
+      >
+        {story.header && <h2>{story.header}</h2>}
+        {story.subHeader && <p>{story.subHeader}</p>}
+      </div>
+
       {story.mediaType === "IMAGE" && (
         <>
           {!loaded && <div className={styles.loading} />}
