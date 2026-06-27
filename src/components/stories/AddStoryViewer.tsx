@@ -314,7 +314,7 @@ export default function AddStoryViewer({ onClose }: Props) {
           {subHeader && <p>{subHeader}</p>}
         </div>
       )}
-      {preview && (
+      {!isPending && preview && (
         <Button
           type="button"
           variant="contained"
