@@ -192,7 +192,7 @@ export type UserWhereInput = {
   visibility?: Prisma.EnumAccountVisibilityFilter<"User"> | $Enums.AccountVisibility
   accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
-  stories?: Prisma.StoryListRelationFilter
+  story?: Prisma.XOR<Prisma.StoryNullableScalarRelationFilter, Prisma.StoryWhereInput> | null
   followers?: Prisma.FollowListRelationFilter
   following?: Prisma.FollowListRelationFilter
 }
@@ -206,7 +206,7 @@ export type UserOrderByWithRelationInput = {
   visibility?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
-  stories?: Prisma.StoryOrderByRelationAggregateInput
+  story?: Prisma.StoryOrderByWithRelationInput
   followers?: Prisma.FollowOrderByRelationAggregateInput
   following?: Prisma.FollowOrderByRelationAggregateInput
 }
@@ -223,7 +223,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   visibility?: Prisma.EnumAccountVisibilityFilter<"User"> | $Enums.AccountVisibility
   accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
-  stories?: Prisma.StoryListRelationFilter
+  story?: Prisma.XOR<Prisma.StoryNullableScalarRelationFilter, Prisma.StoryWhereInput> | null
   followers?: Prisma.FollowListRelationFilter
   following?: Prisma.FollowListRelationFilter
 }, "id" | "email">
@@ -261,7 +261,7 @@ export type UserCreateInput = {
   visibility?: $Enums.AccountVisibility
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
   following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
 }
@@ -275,7 +275,7 @@ export type UserUncheckedCreateInput = {
   visibility?: $Enums.AccountVisibility
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryUncheckedCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
   following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
 }
@@ -289,7 +289,7 @@ export type UserUpdateInput = {
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
   following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
 }
@@ -303,7 +303,7 @@ export type UserUncheckedUpdateInput = {
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUncheckedUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
   following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
 }
@@ -411,18 +411,18 @@ export type UserUpdateOneRequiredWithoutFollowersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFollowersInput, Prisma.UserUpdateWithoutFollowersInput>, Prisma.UserUncheckedUpdateWithoutFollowersInput>
 }
 
-export type UserCreateNestedOneWithoutStoriesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutStoriesInput, Prisma.UserUncheckedCreateWithoutStoriesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoriesInput
+export type UserCreateNestedOneWithoutStoryInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoryInput, Prisma.UserUncheckedCreateWithoutStoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoryInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutStoriesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutStoriesInput, Prisma.UserUncheckedCreateWithoutStoriesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoriesInput
-  upsert?: Prisma.UserUpsertWithoutStoriesInput
+export type UserUpdateOneRequiredWithoutStoryNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoryInput, Prisma.UserUncheckedCreateWithoutStoryInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoryInput
+  upsert?: Prisma.UserUpsertWithoutStoryInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoriesInput, Prisma.UserUpdateWithoutStoriesInput>, Prisma.UserUncheckedUpdateWithoutStoriesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoryInput, Prisma.UserUpdateWithoutStoryInput>, Prisma.UserUncheckedUpdateWithoutStoryInput>
 }
 
 export type UserCreateNestedOneWithoutAccountsInput = {
@@ -462,7 +462,7 @@ export type UserCreateWithoutFollowingInput = {
   visibility?: $Enums.AccountVisibility
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
 }
 
@@ -475,7 +475,7 @@ export type UserUncheckedCreateWithoutFollowingInput = {
   visibility?: $Enums.AccountVisibility
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryUncheckedCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
 }
 
@@ -493,7 +493,7 @@ export type UserCreateWithoutFollowersInput = {
   visibility?: $Enums.AccountVisibility
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryCreateNestedOneWithoutUserInput
   following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
 }
 
@@ -506,7 +506,7 @@ export type UserUncheckedCreateWithoutFollowersInput = {
   visibility?: $Enums.AccountVisibility
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryUncheckedCreateNestedOneWithoutUserInput
   following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
 }
 
@@ -535,7 +535,7 @@ export type UserUpdateWithoutFollowingInput = {
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
 }
 
@@ -548,7 +548,7 @@ export type UserUncheckedUpdateWithoutFollowingInput = {
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUncheckedUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
 }
 
@@ -572,7 +572,7 @@ export type UserUpdateWithoutFollowersInput = {
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUpdateOneWithoutUserNestedInput
   following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
 }
 
@@ -585,11 +585,11 @@ export type UserUncheckedUpdateWithoutFollowersInput = {
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUncheckedUpdateOneWithoutUserNestedInput
   following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
 }
 
-export type UserCreateWithoutStoriesInput = {
+export type UserCreateWithoutStoryInput = {
   id?: string
   name?: string | null
   email?: string | null
@@ -602,7 +602,7 @@ export type UserCreateWithoutStoriesInput = {
   following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
 }
 
-export type UserUncheckedCreateWithoutStoriesInput = {
+export type UserUncheckedCreateWithoutStoryInput = {
   id?: string
   name?: string | null
   email?: string | null
@@ -615,23 +615,23 @@ export type UserUncheckedCreateWithoutStoriesInput = {
   following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
 }
 
-export type UserCreateOrConnectWithoutStoriesInput = {
+export type UserCreateOrConnectWithoutStoryInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutStoriesInput, Prisma.UserUncheckedCreateWithoutStoriesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoryInput, Prisma.UserUncheckedCreateWithoutStoryInput>
 }
 
-export type UserUpsertWithoutStoriesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutStoriesInput, Prisma.UserUncheckedUpdateWithoutStoriesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutStoriesInput, Prisma.UserUncheckedCreateWithoutStoriesInput>
+export type UserUpsertWithoutStoryInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStoryInput, Prisma.UserUncheckedUpdateWithoutStoryInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoryInput, Prisma.UserUncheckedCreateWithoutStoryInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutStoriesInput = {
+export type UserUpdateToOneWithWhereWithoutStoryInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutStoriesInput, Prisma.UserUncheckedUpdateWithoutStoriesInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStoryInput, Prisma.UserUncheckedUpdateWithoutStoryInput>
 }
 
-export type UserUpdateWithoutStoriesInput = {
+export type UserUpdateWithoutStoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -644,7 +644,7 @@ export type UserUpdateWithoutStoriesInput = {
   following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
 }
 
-export type UserUncheckedUpdateWithoutStoriesInput = {
+export type UserUncheckedUpdateWithoutStoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -665,7 +665,7 @@ export type UserCreateWithoutAccountsInput = {
   image?: string | null
   visibility?: $Enums.AccountVisibility
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
   following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
 }
@@ -678,7 +678,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   image?: string | null
   visibility?: $Enums.AccountVisibility
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryUncheckedCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
   following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
 }
@@ -707,7 +707,7 @@ export type UserUpdateWithoutAccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
   following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
 }
@@ -720,7 +720,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUncheckedUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
   following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
 }
@@ -733,7 +733,7 @@ export type UserCreateWithoutSessionsInput = {
   image?: string | null
   visibility?: $Enums.AccountVisibility
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
   following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
 }
@@ -746,7 +746,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   image?: string | null
   visibility?: $Enums.AccountVisibility
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutUserInput
+  story?: Prisma.StoryUncheckedCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
   following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
 }
@@ -775,7 +775,7 @@ export type UserUpdateWithoutSessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
   following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
 }
@@ -788,7 +788,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   visibility?: Prisma.EnumAccountVisibilityFieldUpdateOperationsInput | $Enums.AccountVisibility
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-  stories?: Prisma.StoryUncheckedUpdateManyWithoutUserNestedInput
+  story?: Prisma.StoryUncheckedUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
   following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
 }
@@ -801,7 +801,6 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
 export type UserCountOutputType = {
   accounts: number
   sessions: number
-  stories: number
   followers: number
   following: number
 }
@@ -809,7 +808,6 @@ export type UserCountOutputType = {
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
-  stories?: boolean | UserCountOutputTypeCountStoriesArgs
   followers?: boolean | UserCountOutputTypeCountFollowersArgs
   following?: boolean | UserCountOutputTypeCountFollowingArgs
 }
@@ -841,13 +839,6 @@ export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountStoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.StoryWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountFollowersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.FollowWhereInput
 }
@@ -869,7 +860,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   visibility?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  stories?: boolean | Prisma.User$storiesArgs<ExtArgs>
+  story?: boolean | Prisma.User$storyArgs<ExtArgs>
   followers?: boolean | Prisma.User$followersArgs<ExtArgs>
   following?: boolean | Prisma.User$followingArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -906,7 +897,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  stories?: boolean | Prisma.User$storiesArgs<ExtArgs>
+  story?: boolean | Prisma.User$storyArgs<ExtArgs>
   followers?: boolean | Prisma.User$followersArgs<ExtArgs>
   following?: boolean | Prisma.User$followingArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -919,7 +910,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     sessions: Prisma.$SessionPayload<ExtArgs>[]
-    stories: Prisma.$StoryPayload<ExtArgs>[]
+    story: Prisma.$StoryPayload<ExtArgs> | null
     followers: Prisma.$FollowPayload<ExtArgs>[]
     following: Prisma.$FollowPayload<ExtArgs>[]
   }
@@ -1326,7 +1317,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  stories<T extends Prisma.User$storiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  story<T extends Prisma.User$storyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storyArgs<ExtArgs>>): Prisma.Prisma__StoryClient<runtime.Types.Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   followers<T extends Prisma.User$followersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   following<T extends Prisma.User$followingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1805,9 +1796,9 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * User.stories
+ * User.story
  */
-export type User$storiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$storyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Story
    */
@@ -1821,11 +1812,6 @@ export type User$storiesArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.StoryInclude<ExtArgs> | null
   where?: Prisma.StoryWhereInput
-  orderBy?: Prisma.StoryOrderByWithRelationInput | Prisma.StoryOrderByWithRelationInput[]
-  cursor?: Prisma.StoryWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.StoryScalarFieldEnum | Prisma.StoryScalarFieldEnum[]
 }
 
 /**

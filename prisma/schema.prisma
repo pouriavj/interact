@@ -30,7 +30,7 @@ model User {
   accounts   Account[]
   sessions   Session[]
 
-  stories    Story[]
+  story      Story?
 
   followers  Follow[] @relation("Following")
   following  Follow[] @relation("Follower")
@@ -59,10 +59,10 @@ model Story {
   createdAt DateTime @default(now())
   expiresAt DateTime
 
-  userId String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ userId String @unique
 
-  @@index([userId])
+ user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
   @@index([expiresAt])
 }
 model Account {
