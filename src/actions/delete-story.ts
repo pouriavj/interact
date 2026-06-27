@@ -1,8 +1,7 @@
 "use server";
 
 import { del } from "@vercel/blob";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
@@ -13,7 +12,7 @@ export async function deleteStory(prevState: { message: string }) {
 
     if (!session?.user?.id) {
       return {
-        message: "You must be signed in.",
+        message: `ERROR:You must be signed in.:${Date.now()}`,
       };
     }
 
@@ -23,34 +22,38 @@ export async function deleteStory(prevState: { message: string }) {
       },
       select: {
         mediaUrl: true,
+        user: {
+          select: {
+            name: true, 
+          },
+        },
       },
     });
 
     if (!story) {
       return {
-        message: "Story not found.",
+        message: `ERROR:Story not found.:${Date.now()}`,
       };
     }
 
-    // Delete from Blob
     await del(story.mediaUrl);
 
-    // Delete from Prisma
     await prisma.story.delete({
       where: {
         userId: session.user.id,
       },
     });
-
+    revalidateTag(`own-story-${session.user.id}`, "max");
     revalidatePath("/");
-    // revalidatePath("/profile");
+
+    return {
+      message: `SUCCESS:${Date.now()}`,
+    };
   } catch (error) {
     console.error(error);
 
     return {
-      message: "Something went wrong.",
+      message: `ERROR:Something went wrong.:${Date.now()}`,
     };
   }
-
-  redirect("/");
 }

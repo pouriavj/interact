@@ -23,6 +23,7 @@ export async function getUserProfile(username: string) {
     [`user-profile-${username}`],
     {
       revalidate: 60,
-    }
+      tags: [`user-profile-${username}`],
+    },
   )();
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import { put } from "@vercel/blob";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
@@ -79,7 +79,7 @@ export async function createStory(
         // subHeader,
       },
     });
-
+    revalidateTag(`own-story-${session.user.id}`, "max");
     revalidatePath("/");
   } catch (error) {
     console.error(error);

@@ -1,5 +1,7 @@
+import { auth } from "@/auth";
+
 import { notFound } from "next/navigation";
-import { getUserProfile } from "@/queries";
+import { getUserProfile, fetchOwnStory } from "@/queries";
 import ProfileClient from "@/components/profile/ProfileClient";
 
 export default async function ProfilePage({
@@ -9,11 +11,14 @@ export default async function ProfilePage({
 }) {
   const { username } = await params;
 
-  const user = await getUserProfile(username);
-
+  const [session, user] = await Promise.all([auth(), getUserProfile(username)]);
   if (!user) {
     notFound();
   }
 
-  return <ProfileClient user={user} />;
+  const isOwner = session?.user?.id === user.id;
+
+  const story = isOwner ? await fetchOwnStory(user.id) : null;
+
+  return <ProfileClient user={user} isOwner={isOwner} story={story} />;
 }

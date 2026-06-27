@@ -34,9 +34,10 @@ async function fetchFollowingStoriesBase(userId: string) {
 export async function fetchFollowingStories(userId: string) {
   return unstable_cache(
     () => fetchFollowingStoriesBase(userId),
-    [`following-stories-${userId}`], // ✅ per-user cache key
+    [`following-stories-${userId}`],
     {
-      revalidate: 60, // 60s Instagram-style refresh
-    }
+      revalidate: 60,
+      tags: [`following-stories-${userId}`],
+    },
   )();
 }

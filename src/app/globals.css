@@ -153,3 +153,9 @@ body {
   -webkit-touch-callout: none;
   box-sizing: border-box;
 }
+
+/* Sonner Toast */
+[data-sonner-toast] {
+  bottom: 54px !important;
+  border-radius: 0 !important;
+}

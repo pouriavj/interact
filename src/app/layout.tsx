@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "./providers";
 import BottomNav from "@/components/bottom-nav/BottomNav";
 import localFont from "next/font/local";
+import { Toaster } from "sonner";
 
 const satoshi = localFont({
   src: "../../public/fonts/Satoshi-Regular.woff2",
@@ -74,6 +75,7 @@ export default async function RootLayout({
       <body>
         <Providers>
           {children}
+          <Toaster richColors position="bottom-center" />
           <BottomNav />
         </Providers>
       </body>

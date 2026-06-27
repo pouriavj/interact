@@ -37,6 +37,7 @@ export async function fetchPublicStories() {
     ["public-stories"],
     {
       revalidate: 60,
-    }
+      tags: ["public-stories"],
+    },
   )();
 }
