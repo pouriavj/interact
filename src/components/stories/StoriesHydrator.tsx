@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import StoriesClient from "./StoriesClient";
-import { fetchFollowingStories } from "@/queries";
+import { fetchFollowingStories, fetchOwnStory } from "@/queries";
 import StoriesSkeleton from "../skeletons/StoriesSkeleton";
 
 export type Story = {
@@ -13,7 +13,7 @@ export type Story = {
   createdAt: Date;
   header: string | null;
   subHeader: string | null;
-  
+
   user: {
     id: string;
     name: string | null;
@@ -32,6 +32,8 @@ export default function StoriesHydrator({ initialStories }: Props) {
     null,
   );
 
+  const [ownStory, setOwnStory] = useState<Story | null>(null);
+
   useEffect(() => {
     if (status !== "authenticated") return;
 
@@ -43,10 +45,14 @@ export default function StoriesHydrator({ initialStories }: Props) {
     async function loadStories() {
       if (!userId) return;
 
-      const data = await fetchFollowingStories(userId);
+      const [following, own] = await Promise.all([
+        fetchFollowingStories(userId),
+        fetchOwnStory(userId),
+      ]);
 
       if (!cancelled) {
-        setFollowingStories(data);
+        setFollowingStories(following);
+        setOwnStory(own);
       }
     }
 
@@ -68,23 +74,19 @@ export default function StoriesHydrator({ initialStories }: Props) {
   }
 
   // Logged in
- if (status === "authenticated") {
-  return (
-    <StoriesClient
-      stories={followingStories}
-      currentUser={{
-        name: session.user?.name,
-        image: session.user?.image,
-      }}
-    />
-  );
-}
+  if (status === "authenticated") {
+    return (
+      <StoriesClient
+        stories={followingStories}
+        ownStory={ownStory}
+        currentUser={{
+          name: session.user?.name,
+          image: session.user?.image,
+        }}
+      />
+    );
+  }
 
   // Guest
- return (
-  <StoriesClient
-    stories={initialStories}
-    currentUser={null}
-  />
-);
+  return <StoriesClient stories={initialStories}  ownStory={null} currentUser={null} />;
 }

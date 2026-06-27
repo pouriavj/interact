@@ -7,10 +7,19 @@ async function fetchOwnStoryBase(userId: string) {
   console.log("(Caching Query) DB HIT for own story:", userId);
 
   return prisma.story.findUnique({
-    where: {
-      userId,
+  where: {
+    userId,
+  },
+  include: {
+    user: {
+      select: {
+        id: true,
+        name: true,
+        image: true,
+      },
     },
-  });
+  },
+});
 }
 
 export async function fetchOwnStory(userId: string) {

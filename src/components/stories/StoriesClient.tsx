@@ -27,27 +27,33 @@ type CurrentUser = {
   image: string | null | undefined;
 } | null;
 
+type Props = {
+  stories: Story[] | null;
+  ownStory: Story | null;
+  currentUser: CurrentUser;
+};
+
 export default function StoriesClient({
   stories,
   currentUser,
-}: {
-  stories: Story[] | null;
-  currentUser: CurrentUser;
-}) {
+  ownStory,
+}: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const router = useRouter();
   const [viewedStories, setViewedStories] = useState<string[]>([]);
   const [showAddStory, setShowAddStory] = useState(false);
 
   useEffect(() => {
-    if (selectedIndex === null || !stories) return;
+    if (selectedIndex === null) return;
 
-    const storyId = stories[selectedIndex].id;
+    const story = selectedIndex === -1 ? ownStory : stories?.[selectedIndex];
+
+    if (!story) return;
 
     setViewedStories((prev) =>
-      prev.includes(storyId) ? prev : [...prev, storyId],
+      prev.includes(story.id) ? prev : [...prev, story.id],
     );
-  }, [selectedIndex, stories]);
+  }, [selectedIndex, stories, ownStory]);
 
   function handleYourStoryClick() {
     if (!currentUser) {
@@ -60,18 +66,42 @@ export default function StoriesClient({
   return (
     <>
       {/* Your Story */}
-      <div className={styles.story} onClick={handleYourStoryClick}>
-        <div className={`${styles.avatarWrapper} ${styles.yourAvatarWrapper}`}>
-          <Avatar
-            src={currentUser?.image ?? "/default-avatar2.png"}
-            alt="You"
-            sx={{ width: 74, height: 74 }}
-          />
-          <AddCircleIcon className={styles.plus} />
-        </div>
+      {ownStory ? (
+        <div className={styles.story} onClick={() => setSelectedIndex(-1)}>
+          <div
+            className={`${styles.avatarWrapper} ${
+              viewedStories.includes(ownStory.id)
+                ? styles.viewedAvatarWrapper
+                : ""
+            }`}
+          >
+            <Avatar
+              src={currentUser?.image ?? "/default-avatar2.png"}
+              alt="You"
+              className={styles.avatar}
+              sx={{ width: 74, height: 74 }}
+            />
+          </div>
 
-        <span className={styles.name}>You</span>
-      </div>
+          <span className={styles.name}>You</span>
+        </div>
+      ) : (
+        <div className={styles.story} onClick={handleYourStoryClick}>
+          <div
+            className={`${styles.avatarWrapper} ${styles.yourAvatarWrapper}`}
+          >
+            <Avatar
+              src={currentUser?.image ?? "/default-avatar2.png"}
+              alt="You"
+              sx={{ width: 74, height: 74 }}
+            />
+
+            <AddCircleIcon className={styles.plus} />
+          </div>
+
+          <span className={styles.name}>You</span>
+        </div>
+      )}
 
       {/* Stories */}
       {stories?.map((story, index) => (
@@ -99,18 +129,31 @@ export default function StoriesClient({
         </div>
       ))}
       {/* Show story */}
-      {selectedIndex !== null && stories && (
+      {selectedIndex !== null && (
         <StoryViewer
-          story={stories[selectedIndex]}
+          story={selectedIndex === -1 ? ownStory! : stories![selectedIndex]}
           onNext={() => {
-            if (selectedIndex < stories.length - 1) {
+            if (selectedIndex === -1) {
+              if (stories && stories.length > 0) {
+                setSelectedIndex(0);
+              } else {
+                setSelectedIndex(null);
+              }
+              return;
+            }
+
+            if (selectedIndex < stories!.length - 1) {
               setSelectedIndex(selectedIndex + 1);
             } else {
               setSelectedIndex(null);
             }
           }}
           onPrev={() => {
-            if (selectedIndex > 0) {
+            if (selectedIndex === -1) return;
+
+            if (selectedIndex === 0 && ownStory) {
+              setSelectedIndex(-1);
+            } else if (selectedIndex > 0) {
               setSelectedIndex(selectedIndex - 1);
             }
           }}
