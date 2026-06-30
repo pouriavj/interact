@@ -1,0 +1,110 @@
+.wrapper {
+  flex: 1;
+
+  overflow: hidden;
+
+  background: var(--bg);
+}
+
+.container {
+  height: 100%;
+
+  overflow-y: auto;
+
+  padding: var(--space-3);
+
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================
+   CREATE POST
+========================= */
+
+.createPost {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--space-3);
+
+  padding: var(--space-3);
+
+  margin-bottom: var(--space-4);
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+}
+
+.createHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.createActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leftActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* =========================
+   POST
+========================= */
+
+.post {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--space-3);
+
+  padding: var(--space-3);
+
+  margin-bottom: var(--space-4);
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+}
+
+.postHeader {
+  display: flex;
+  align-items: center;
+
+  gap: var(--space-3);
+}
+
+.postInfo {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  flex: 1;
+}
+
+.postActions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  padding-top: var(--space-3);
+
+  border-top: 1px solid var(--border);
+}
+
+.action {
+  display: flex;
+  align-items: center;
+
+  gap: var(--space-2);
+}

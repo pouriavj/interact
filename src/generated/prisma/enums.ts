@@ -23,3 +23,11 @@ export const StoryMediaType = {
 } as const
 
 export type StoryMediaType = (typeof StoryMediaType)[keyof typeof StoryMediaType]
+
+
+export const PostMediaType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO'
+} as const
+
+export type PostMediaType = (typeof PostMediaType)[keyof typeof PostMediaType]

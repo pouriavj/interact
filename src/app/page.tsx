@@ -1,10 +1,17 @@
 import Header from "@/components/header/Header";
+import Posts from "@/components/posts/Posts";
 
 export default async function Home() {
   return (
-    <div>
-      <Header />
-    </div>
+    <main>
+      <section id="header">
+        <Header />
+      </section>
+
+      <section id="posts">
+        <Posts />
+      </section>
+    </main>
   );
 }
 

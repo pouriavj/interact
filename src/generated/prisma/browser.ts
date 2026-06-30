@@ -33,6 +33,31 @@ export type Follow = Prisma.FollowModel
  */
 export type Story = Prisma.StoryModel
 /**
+ * Model Post
+ * 
+ */
+export type Post = Prisma.PostModel
+/**
+ * Model PostMedia
+ * 
+ */
+export type PostMedia = Prisma.PostMediaModel
+/**
+ * Model PostLike
+ * 
+ */
+export type PostLike = Prisma.PostLikeModel
+/**
+ * Model Comment
+ * 
+ */
+export type Comment = Prisma.CommentModel
+/**
+ * Model PostShare
+ * 
+ */
+export type PostShare = Prisma.PostShareModel
+/**
  * Model Account
  * 
  */
